@@ -1,0 +1,117 @@
+HE QUITADO EL NAVEGADOR de index.html:
+    <!-- Navegador -->
+    <nav
+      class="navbar navbar-expand-sm navbar-dark"
+      style="background-color: #6f42c1"
+    >
+      <div class="container-fluid d-flex p-0">
+        <!-- Logo -->
+        <div class="nav-item text-center flex-fill">
+          <a class="navbar-brand text-white" href="introduccion.html">
+            <img
+              src="logo.png"
+              alt="Logo"
+              class="rounded-circle"
+              width="40"
+              height="40"
+            />
+          </a>
+        </div>
+
+        <!-- Botón hamburguesa -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Items del navbar -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <div class="d-flex w-100">
+            <!-- Servicios -->
+            <div class="nav-item dropdown text-center flex-fill">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                Servicios
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="ayudaLegal.html"
+                    >Ayuda legal</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="psicologia.html">Psicología</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="centrosAcogida.html"
+                    >Centros de acogida</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Información -->
+            <div class="nav-item dropdown text-center flex-fill">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                Información
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="prevencionSeguridad.html"
+                    >Prevención y seguridad</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="derechosLegislacion.html"
+                    >Derechos y legislación</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="guiasYrecursosdeapoyo.html"
+                    >Guías y recursos de apoyo</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="testimonios.html"
+                    >Testimonios y experiencias</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Emergencia -->
+            <div class="nav-item text-center flex-fill">
+              <a class="nav-link text-white" href="emergencia.html"
+                >Emergencia</a
+              >
+            </div>
+
+            <!-- Usuario -->
+            <div class="nav-item text-center flex-fill">
+              <a
+                href="editarPerfil.html"
+                class="navbar-text text-white text-decoration-none"
+              >
+                <i class="bi bi-person me-2"></i> Patrii
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>

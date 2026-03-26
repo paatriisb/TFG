@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inicio - Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link href="./css/informacion.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navegador -->
+    <nav
+      class="navbar navbar-expand-sm navbar-dark"
+      style="background-color: #6f42c1"
+    >
+      <div class="container-fluid d-flex p-0">
+        <!-- Logo -->
+        <div class="nav-item text-center flex-fill">
+          <a class="navbar-brand text-white" href="introduccion.html">
+            <img
+              src="logo.png"
+              alt="Logo"
+              class="rounded-circle"
+              width="40"
+              height="40"
+            />
+          </a>
+        </div>
+
+        <!-- Botón hamburguesa -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Items del navbar -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <div class="d-flex w-100">
+            <!-- Servicios -->
+            <div class="nav-item dropdown text-center flex-fill">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                Servicios
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="ayudaLegal.html"
+                    >Ayuda legal</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="psicologia.html">Psicología</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="centrosAcogida.html"
+                    >Centros de acogida</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Información -->
+            <div class="nav-item dropdown text-center flex-fill">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                Información
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="prevencionSeguridad.html"
+                    >Prevención y seguridad</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="derechosLegislacion.html"
+                    >Derechos y legislación</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="guiasYrecursosdeapoyo.html"
+                    >Guías y recursos de apoyo</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="testimonios.html"
+                    >Testimonios y experiencias</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Emergencia -->
+            <div class="nav-item text-center flex-fill">
+              <a class="nav-link text-white" href="emergencia.html"
+                >Emergencia</a
+              >
+            </div>
+
+            <!-- Usuario -->
+            <div class="nav-item text-center flex-fill">
+              <a
+                href="editarPerfil.html"
+                class="navbar-text text-white text-decoration-none"
+              >
+                <i class="bi bi-person me-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Controles rápidos -->
+    <div class="container-fluid mt-2">
+      <div class="d-flex justify-content-end pe-4">
+        <button class="btn text-white me-2 btn-modo-discreto">
+          Modo discreto
+        </button>
+        <button
+          class="btn text-white btn-danger"
+          style="background: linear-gradient(90deg, #ff4c4c, #ff0000)"
+          onclick="salidaRapida()"
+        >
+          X
+        </button>
+      </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+      <!-- Bienvenida -->
+      <h1 class="titulo-seccion text-center mb-4" id="bienvenida"></h1>
+
+      <!-- Estadísticas por año -->
+      <div class="row g-4 mt-4">
+        <h2 class="text-center fw-bold mb-4 texto-morado">
+          ESTADÍSTICAS RECIENTES
+        </h2>
+
+        <!-- 2023 -->
+        <div class="col-md-4">
+          <div class="card shadow border-0 text-center p-3">
+            <i class="bi bi-calendar2-check fs-1 mb-2"></i>
+            <h3 class="fw-bold">2023</h3>
+            <p class="mb-2">
+              <strong>48,700</strong> denuncias oficiales por violencia de
+              género en España.
+            </p>
+            <p class="text-muted small">
+              Fuente: Estadísticas oficiales del Ministerio de Igualdad.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="col-md-4">
+          <div class="card shadow border-0 text-center p-3">
+            <i class="bi bi-calendar2-week fs-1 mb-2"></i>
+            <h3 class="fw-bold">2024</h3>
+            <p class="mb-2">
+              <strong>50,300</strong> denuncias registradas hasta diciembre.
+            </p>
+            <p class="text-muted small">
+              Incremento del <strong>3.2%</strong> respecto a 2023.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="col-md-4">
+          <div class="card shadow border-0 text-center p-3">
+            <i class="bi bi-calendar2-day fs-1 mb-2"></i>
+            <h3 class="fw-bold">2025</h3>
+            <p class="mb-2">
+              Más de <strong>22,000</strong> denuncias en los primeros 6 meses.
+            </p>
+            <p class="text-muted small">
+              Datos provisionales. Objetivo: reducir cifras con prevención.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Consejos de seguridad -->
+      <div class="row mt-5 g-4">
+        <h2 class="text-center fw-bold mb-4 texto-morado">
+          CONSEJOS DE SEGURIDAD
+        </h2>
+
+        <div class="col-md-4">
+          <div class="card shadow border-0 text-center p-3">
+            <i class="bi bi-lock-fill fs-1 mb-2"></i>
+            <h4 class="fw-bold">Protege tu información</h4>
+            <p class="text-muted small">
+              No compartas contraseñas ni datos personales en redes.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card shadow border-0 text-center p-3">
+            <i class="bi bi-telephone-fill fs-1 mb-2"></i>
+            <h4 class="fw-bold">Línea 016</h4>
+            <p class="text-muted small">
+              Más de 1 millón de llamadas atendidas desde su creación, 24h todos
+              los días.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card shadow border-0 text-center p-3">
+            <i class="bi bi-people-fill fs-1 mb-2"></i>
+            <h4 class="fw-bold">Busca apoyo</h4>
+            <p class="text-muted small">
+              Acude a servicios sociales, ONG o familiares de confianza.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="chat.html" class="text-decoration-none">
+      <div class="chat-float">
+        <i class="bi bi-chat-dots-fill"></i>
+      </div>
+    </a>
+    <br />
+    <br />
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/introduccion.js"></script>
+    <script>
+      /* Mostrar nombre del usuario
+      const usuario = localStorage.getItem("usuario");
+      if (usuario) {
+        document.getElementById("bienvenida").innerText =
+          `¡Bienvenido, ${usuario}!`;
+        document.getElementById("usuarioDisplay").innerText = usuario;
+      } else {
+        // Si no hay usuario logueado, redirige al login
+        window.location.href = "index.html";
+      } */
+    </script>
+  </body>
+</html>
