@@ -601,3 +601,8 @@ body.modo-discreto .card p {
 body.modo-discreto .text-muted {
   color: grey !important;
 }
+
+/* background del div del buscador, modo discreto y salida rápida */
+.colorFondo {
+  background: rgba(111, 66, 193, 0.4);
+}
