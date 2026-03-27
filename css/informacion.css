@@ -104,6 +104,7 @@ nav.navbar .nav-link {
 .btn-modo-discreto {
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
   background: linear-gradient(90deg, #ffc107, #f9e31a);
+  color: white !important;
   border: none;
   padding: 0.75rem 1.5rem;
   font-size: 1.2rem;
@@ -111,8 +112,10 @@ nav.navbar .nav-link {
 }
 
 .btn-danger {
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1.2rem;
+  background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
+  color: white !important;
 }
 
 .btn.btn-primary {
@@ -518,7 +521,7 @@ nav .nav-link {
 /* MODO DISCRETO  */
 body.modo-discreto {
   background: #4e4d4d !important;
-  color: #d0d0d0 !important;
+  color: grey !important;
   transition: all 0.5s ease;
 }
 body.modo-discreto .container,
@@ -531,7 +534,7 @@ body.modo-discreto .row {
 body.modo-discreto .navbar,
 body.modo-discreto .buscador-personalizado {
   background-color: #333333 !important;
-  color: #d0d0d0 !important;
+  color: grey !important;
 }
 body.modo-discreto .nav-link,
 body.modo-discreto .dropdown-item,
@@ -542,7 +545,7 @@ body.modo-discreto .navbar-text {
 /* Cards */
 body.modo-discreto .card-servicio {
   background-color: #3a3a3a !important;
-  color: #d0d0d0 !important;
+  color: grey !important;
   border: 1px solid grey !important;
   transition:
     background-color 0.3s ease,
@@ -587,4 +590,14 @@ body.modo-discreto .card:hover {
 body.modo-discreto .btn-morado-personalizado {
   background-color: #555 !important;
   border: 1px solid #666 !important;
+}
+
+/* Gris clarito las letras que se veían casi negras en la página de introducción */
+body.modo-discreto .card p {
+  color: grey !important;
+}
+
+/* Gris clarito las letras que se veían casi negras en la página de guias y recursos */
+body.modo-discreto .text-muted {
+  color: grey !important;
 }
