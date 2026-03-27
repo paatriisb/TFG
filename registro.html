@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>016 Seguro - Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="./css/loginRegistro.css?v=3">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container-fluid mt-2">
+      <div class="d-flex justify-content-end pe-4">
+        <button class="btn text-black me-2 btn-modo-discreto">Modo discreto</button>
+        <button class="btn text-white btn-danger btn-x-salir" style="background: linear-gradient(90deg, #ff4c4c, #ff0000)" onclick="salidaRapida()">X</button>
+      </div>
+
+    <div class="container px-3 mt-5">
+        <div class="card card-login shadow">
+            <div class="card-header-custom d-flex justify-content-between align-items-center shadow-sm">
+                <div>
+                    <h2 class="fw-bold mb-0">NUEVA CUENTA</h2>
+                    <p class="mb-0 opacity-75" style="font-size: 0.85rem;">REGISTRO DE USUARIO SEGURO</p>
+                </div>
+                <img src="logo.png" alt="Logo" width="70" height="70" class="rounded-circle border border-white border-2" />
+            </div>
+            <div class="card-body p-4">
+                <form id="registroForm" class="needs-validation" novalidate>
+                    <div class="mb-3 position-relative">
+                        <label class="form-label fw-semibold label-purple">CORREO ELECTRÓNICO</label>
+                        <input type="email" class="form-control form-control-lg" placeholder="ejemplo@correo.com" id="emailRegistro" required>
+                        <div class="invalid-feedback label-purple">
+                            Por favor, introduce un correo electrónico válido.
+                        </div>
+                    </div>
+                    <div class="mb-3 position-relative">
+                        <label class="form-label fw-semibold label-purple">CONTRASEÑA</label>
+                        <input type="password" class="form-control form-control-lg" placeholder="••••••••" id="passRegistro" required>
+                        <div class="invalid-feedback label-purple">
+                            La contraseña es obligatoria.
+                        </div>
+                    </div>
+                    <div class="mb-3 position-relative">
+                        <label class="form-label fw-semibold label-purple">REPETIR CONTRASEÑA</label>
+                        <input type="password" class="form-control form-control-lg" placeholder="••••••••" id="passConfirmRegistro" required>
+                        <div class="invalid-feedback label-purple">
+                            Debes confirmar la contraseña.
+                        </div>
+                    </div>
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn btn-login-submit py-2 shadow-sm text-white">CREAR CUENTA</button>
+                        <button type="button" id="btnVolverLogin" class="btn btn-outline-purple py-2">VOLVER AL LOGIN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/registro.js?v=3"></script>
+</body>
+</html>
