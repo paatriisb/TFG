@@ -108,6 +108,7 @@ nav.navbar .nav-link {
 .btn-modo-discreto {
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
   background: linear-gradient(90deg, #ffc107, #f9e31a);
+  color: white !important;
   border: none;
   padding: 0.75rem 1.5rem;
   font-size: 1.2rem;
@@ -117,12 +118,8 @@ nav.navbar .nav-link {
 .btn-danger {
   padding: 0.75rem 1.5rem;
   font-size: 1.2rem;
-}
-
-.btn.btn-primary {
-  padding: 0.75rem 2rem;
-  font-size: 1.25rem;
-  font-weight: 600;
+  background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
+  color: white !important;
 }
 
 /* Hamburguesa navegador móvil */
@@ -357,13 +354,13 @@ body.modo-discreto .card-login {
 
 body.modo-discreto .card-header-custom {
   background: linear-gradient(90deg, #5a32a3, #7a4fc0);
-  color: #f0f0f0;
+  color: white;
 }
 
 body.modo-discreto .form-control-lg {
   background-color: #4a4a4a !important;
   color: #e0e0e0 !important;
-  border: 1px solid #666 !important;
+  border: 1px solid grey !important;
   transition:
     background-color 0.3s,
     transform 0.2s,
@@ -372,7 +369,7 @@ body.modo-discreto .form-control-lg {
 
 body.modo-discreto .form-control-lg:focus {
   background-color: #555 !important;
-  color: #ffffff !important;
+  color: white !important;
   border-color: #9b59b6 !important;
   box-shadow: 0 0 8px rgba(155, 89, 182, 0.7);
   transform: scale(1.02);
@@ -384,7 +381,7 @@ body.modo-discreto .label-purple {
 
 body.modo-discreto .btn-login-submit {
   background: linear-gradient(90deg, #6f42c1, #9b59b6);
-  color: #fff;
+  color: white;
   transition: all 0.3s ease;
 }
 
@@ -401,11 +398,16 @@ body.modo-discreto .btn-outline-purple {
 
 body.modo-discreto .btn-outline-purple:hover {
   background-color: #555 !important;
-  color: #fff !important;
+  color: white !important;
   transform: translateY(-2px) scale(1.03);
 }
 
 body.modo-discreto img.rounded-circle {
   border: 2px solid #888 !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Color de la letra del placeholder */
+body.modo-discreto input.form-control::placeholder {
+  color: grey !important;
 }
