@@ -1,4 +1,3 @@
-/* --- TUS ESTILOS ORIGINALES --- */
 html,
 body {
   height: 100%;
@@ -11,7 +10,7 @@ body {
   min-height: 100vh;
   background: linear-gradient(180deg, #e4cefd, #f9e9dd);
   background-attachment: fixed;
-  transition: all 0.5s ease; /* Para que el cambio a modo discreto sea suave */
+  transition: all 0.5s ease; 
 }
 
 .titulo-seccion {
@@ -88,7 +87,7 @@ body {
   background-color: #5a32a3;
 }
 
-/* --- ESTILOS MODO DISCRETO (DE TU COMPAÑERA) --- */
+/*ESTILOS MODO DISCRETO */
 
 body.modo-discreto {
   background: #4e4d4d !important;
@@ -110,9 +109,7 @@ body.modo-discreto .card-servicio-header {
 }
 
 body.modo-discreto .card-servicio-body ul li {
-  filter: blur(
-    2px
-  ); /* Esto hace que el texto sea ilegible hasta pasar el ratón */
+  filter: blur(2px);
   transition: filter 0.3s ease;
 }
 

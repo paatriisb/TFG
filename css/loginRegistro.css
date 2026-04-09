@@ -1,6 +1,3 @@
-/* =======================================================
-   1. TUS ESTILOS ORIGINALES (BASE, NAV Y LOGIN)
-   ======================================================= */
 html,
 body {
   height: 100%;
@@ -14,10 +11,9 @@ body {
   background: linear-gradient(180deg, #e4cefd, #f9e9dd);
   background-attachment: fixed;
   font-family: sans-serif;
-  transition: all 0.5s ease; /* Para que el cambio a modo discreto sea suave */
+  transition: all 0.5s ease;
 }
 
-/* Navegador */
 nav.navbar {
   background-color: #6f42c1;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -39,7 +35,6 @@ nav.navbar {
   height: 50px;
 }
 
-/* Botones de Seguridad (Modo Discreto y X) */
 .btn-modo-discreto,
 .btn-danger {
   height: 50px !important;
@@ -52,9 +47,7 @@ nav.navbar {
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none !important;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .btn-modo-discreto {
@@ -67,7 +60,6 @@ nav.navbar {
   color: white !important;
 }
 
-/* Estilos específicos de Login / Registro */
 .card-login {
   background-color: #e5dbff;
   border: none;
@@ -99,17 +91,21 @@ nav.navbar {
   border-radius: 8px;
 }
 
-/* =======================================================
-   2. MODO DISCRETO (ESTILOS DE TU COMPAÑERA + LOGIN)
-   ======================================================= */
+.form-check-input:checked {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+}
 
-/* Fondo General Oscuro */
+.form-check-label {
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
 body.modo-discreto {
   background: #4e4d4d !important;
   color: #d0d0d0 !important;
 }
 
-/* Navegador en Modo Discreto */
 body.modo-discreto .navbar {
   background-color: #333333 !important;
 }
@@ -119,18 +115,14 @@ body.modo-discreto .navbar-text {
   color: #a8b0c0 !important;
 }
 
-/* Cards de LOGIN y REGISTRO en Modo Discreto */
 body.modo-discreto .card-login {
   background-color: #3a3a3a !important;
   color: #d0d0d0 !important;
   border: 1px solid #555 !important;
-  filter: blur(5px); /* Se ve borroso por defecto por seguridad */
-  transition:
-    filter 0.3s ease,
-    background-color 0.3s ease;
+  filter: blur(5px);
+  transition: filter 0.3s ease, background-color 0.3s ease;
 }
 
-/* Al pasar el ratón por la card de login, se quita el borroso */
 body.modo-discreto .card-login:hover {
   filter: blur(0);
 }
@@ -154,7 +146,10 @@ body.modo-discreto .btn-login-submit {
   border: 1px solid #666 !important;
 }
 
-/* Chat flotante */
+body.modo-discreto .form-check-label {
+  color: white !important;
+}
+
 .chat-float {
   position: fixed;
   bottom: 20px;
@@ -182,17 +177,11 @@ body.modo-discreto .chat-float {
   background-color: grey !important;
 }
 
-/* Color gris clarito para los placeholders */
 body.modo-discreto input.form-control::placeholder {
   color: grey !important;
 }
 
-/* Color gris clarito para crear cuenta en login */
-body.modo-discreto #btnIrRegistro {
-  color: grey !important;
-}
-
-/* Color gris clarito para el botón de volver al login de registro*/
+body.modo-discreto #btnIrRegistro,
 body.modo-discreto #btnVolverLogin {
   color: grey !important;
 }

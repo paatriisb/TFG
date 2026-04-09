@@ -1,64 +1,84 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Configuración de la Salida Rápida (Botón X)
+    const btnModo = document.querySelector(".btn-modo-discreto");
+    if (btnModo) {
+        btnModo.addEventListener("click", () => {
+            document.body.classList.toggle("modo-discreto");
+            localStorage.setItem("modoDiscreto", document.body.classList.contains("modo-discreto"));
+        });
+    }
+
     const botonX = document.querySelector(".btn-x-salir");
     if (botonX) {
-        botonX.addEventListener("click", salidaRapida);
+        botonX.addEventListener("click", () => {
+            window.location.replace("https://www.google.com");
+            window.open("https://www.google.com", "_newtab");
+        });
     }
 
-    // Función de salida rápida (botón X)
-    
-    function salidaRapida() {
-        // Redirige en la misma pestaña
-        window.location.replace("https://www.google.com");
-        // Abre una nueva como medida extra
-        window.open("https://www.google.com", "_newtab");
-    }
-        // 2. Configuración del Modo Discreto
-    const btnModo = document.querySelector(".btn-modo-discreto");
-    
-    // Función para activar/desactivar el modo
-    const toggleModoDiscreto = () => {
-        document.body.classList.toggle("modo-discreto");
-        localStorage.setItem("modoDiscreto", document.body.classList.contains("modo-discreto"));
-    };
+    const checkMostrar = document.getElementById("checkMostrar");
+    const passInput = document.getElementById("passRegistro");
+    const passConfirmInput = document.getElementById("passConfirmRegistro");
 
-    if (btnModo) {
-        btnModo.addEventListener("click", toggleModoDiscreto);
-    }
+    checkMostrar.addEventListener("change", () => {
+        const tipo = checkMostrar.checked ? "text" : "password";
+        passInput.type = tipo;
+        passConfirmInput.type = tipo;
+    });
 
-
-    // 2. LÓGICA DEL FORMULARIO CON VALIDACIÓN DE BOOTSTRAP
     const form = document.getElementById("registroForm");
     
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        // Verificar la validación nativa de Bootstrap
-        if (!form.checkValidity()) {
-            form.classList.add('was-validated'); // Muestra los mensajes invalid-feedback
-            return; // Detiene el envío
-        }
-
-        form.classList.add('was-validated'); // Asegura que se marquen los campos válidos si lo son
-
-        // Obtener valores de forma más segura con IDs
         const email = document.getElementById("emailRegistro").value;
-        const pass = document.getElementById("passRegistro").value;
-        const passConfirm = document.getElementById("passConfirmRegistro").value;
+        const pass = passInput.value;
+        const passConfirm = passConfirmInput.value;
 
-        // Validación personalizada de coincidencia de contraseñas (con SweetAlert2)
-        if (pass !== passConfirm) {
-            Swal.fire({
-                title: 'Error',
-                text: 'Las contraseñas no coinciden.',
-                icon: 'error',
-                confirmButtonColor: '#6f42c1'
-            });
+        if (localStorage.getItem("emailRegistrado") === email && email !== "") {
+            Swal.fire({ title: 'Error', text: 'Este correo electrónico ya existe.', icon: 'error', confirmButtonColor: '#6f42c1' });
             return;
         }
 
-        // Si todo está bien, guardar datos
+        if (pass === "") {
+            Swal.fire({ title: 'Atención', text: 'Tienes que poner una contraseña.', icon: 'warning', confirmButtonColor: '#6f42c1' });
+            return;
+        }
+        if (passConfirm === "") {
+            Swal.fire({ title: 'Atención', text: 'Tienes que volver a verificar la contraseña.', icon: 'warning', confirmButtonColor: '#6f42c1' });
+            return;
+        }
+
+        let errorSeguridad = "";
+        if (pass.length < 8) {
+            errorSeguridad = "La contraseña debe tener al menos 8 caracteres.";
+        } else if (!/[A-Z]/.test(pass)) {
+            errorSeguridad = "La contraseña debe incluir al menos una letra mayúscula.";
+        } else if (!/[a-z]/.test(pass)) {
+            errorSeguridad = "La contraseña debe incluir al menos una letra minúscula.";
+        } else if (!/[0-9]/.test(pass)) {
+            errorSeguridad = "La contraseña debe incluir al menos un número.";
+        } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?·]/.test(pass)) {
+            errorSeguridad = "La contraseña debe incluir al menos un símbolo.";
+        }
+
+        if (errorSeguridad !== "") {
+            Swal.fire({ title: 'Seguridad insuficiente', text: errorSeguridad, icon: 'warning', confirmButtonColor: '#6f42c1' });
+            return;
+        }
+
+        if (pass !== passConfirm) {
+            Swal.fire({ title: 'Error', text: 'Las contraseñas no coinciden.', icon: 'error', confirmButtonColor: '#6f42c1' });
+            return;
+        }
+
+        if (!form.checkValidity()) {
+            form.classList.add('was-validated'); 
+            return; 
+        }
+
+        form.classList.add('was-validated'); 
+
         localStorage.setItem("emailRegistrado", email);
         localStorage.setItem("passRegistrada", pass);
         localStorage.setItem("usuario", "Patrii"); 
@@ -75,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, false);
 
-    // 3. BOTÓN VOLVER (Mantenido)
     document.getElementById("btnVolverLogin").addEventListener("click", () => {
         window.location.href = "login.html";
     });

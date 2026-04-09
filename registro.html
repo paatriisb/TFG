@@ -13,7 +13,7 @@
     <div class="container-fluid mt-2">
       <div class="d-flex justify-content-end pe-4">
         <button class="btn text-black me-2 btn-modo-discreto">Modo discreto</button>
-        <button class="btn text-white btn-danger btn-x-salir" style="background: linear-gradient(90deg, #ff4c4c, #ff0000)" onclick="salidaRapida()">X</button>
+        <button class="btn text-white btn-danger btn-x-salir">X</button>
       </div>
 
     <div class="container px-3 mt-5">
@@ -27,27 +27,25 @@
             </div>
             <div class="card-body p-4">
                 <form id="registroForm" class="needs-validation" novalidate>
-                    <div class="mb-3 position-relative">
+                    <div class="mb-3">
                         <label class="form-label fw-semibold label-purple">CORREO ELECTRÓNICO</label>
                         <input type="email" class="form-control form-control-lg" placeholder="ejemplo@correo.com" id="emailRegistro" required>
-                        <div class="invalid-feedback label-purple">
-                            Por favor, introduce un correo electrónico válido.
-                        </div>
+                        <div class="invalid-feedback label-purple">Introduce un correo válido.</div>
                     </div>
-                    <div class="mb-3 position-relative">
+                    <div class="mb-3">
                         <label class="form-label fw-semibold label-purple">CONTRASEÑA</label>
                         <input type="password" class="form-control form-control-lg" placeholder="••••••••" id="passRegistro" required>
-                        <div class="invalid-feedback label-purple">
-                            La contraseña es obligatoria.
-                        </div>
                     </div>
-                    <div class="mb-3 position-relative">
+                    <div class="mb-3">
                         <label class="form-label fw-semibold label-purple">REPETIR CONTRASEÑA</label>
                         <input type="password" class="form-control form-control-lg" placeholder="••••••••" id="passConfirmRegistro" required>
-                        <div class="invalid-feedback label-purple">
-                            Debes confirmar la contraseña.
-                        </div>
                     </div>
+                    
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="checkMostrar">
+                        <label class="form-check-label label-purple fw-bold" for="checkMostrar">Mostrar contraseñas</label>
+                    </div>
+
                     <div class="d-grid gap-3">
                         <button type="submit" class="btn btn-login-submit py-2 shadow-sm text-white">CREAR CUENTA</button>
                         <button type="button" id="btnVolverLogin" class="btn btn-outline-purple py-2">VOLVER AL LOGIN</button>
