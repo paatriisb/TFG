@@ -1,0 +1,507 @@
+/* Configuración Base y Fondo Global */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #e4cefd, #f9e9dd);
+  background-attachment: fixed;
+  font-family: sans-serif;
+}
+
+/* Navegador */
+nav.navbar {
+  background-color: #6f42c1;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+  z-index: 4;
+}
+
+nav.navbar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+.navbar .nav-link {
+  position: relative;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  animation: floatButton 3s ease-in-out infinite;
+}
+
+.navbar .nav-link:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+nav.navbar .nav-link {
+  font-size: 1.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.navbar .nav-link:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.navbar-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+}
+
+.dropdown-menu {
+  background-color: #e5dbff !important;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-top: 0;
+  z-index: 1;
+}
+
+.dropdown-item {
+  font-size: 1.15rem;
+  padding: 0.6rem 1.2rem;
+  color: #3b1f70;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #d6c5ff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn-modo-discreto {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(90deg, #ffc107, #f9e31a);
+  color: white !important;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.btn-danger {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
+  color: white !important;
+}
+
+/* Hamburguesa navegador móvil */
+.navbar-toggler {
+  border: 2px solid #ffffff;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.navbar-nav {
+  align-items: flex-start;
+}
+@media (max-width: 576px) {
+  #navbarContent .d-flex {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  #navbarContent .nav-item {
+    width: 100%;
+    text-align: left !important;
+    padding: 0.5rem 1rem;
+  }
+
+  #navbarContent .nav-link {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.75rem 0;
+  }
+
+  #navbarContent .dropdown-menu {
+    position: static !important;
+    width: 100%;
+    margin-top: 0.5rem;
+    border-radius: 10px;
+  }
+
+  #navbarContent .dropdown-item {
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+  }
+
+  #navbarContent .nav-item:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+nav .navbar-brand {
+  margin-left: 1rem;
+}
+
+nav .nav-item:first-child {
+  flex: 0 0 auto !important;
+  text-align: left !important;
+  padding-left: 1rem;
+}
+
+nav .d-flex > .nav-item {
+  flex: 1 1 0 !important;
+}
+
+nav .nav-item {
+  text-align: center !important;
+}
+
+nav .navbar-collapse .nav-item {
+  text-align: center !important;
+}
+
+nav .nav-link {
+  width: 100%;
+  text-align: center !important;
+}
+
+@media (max-width: 576px) {
+  #navbarContent .nav-item {
+    text-align: left !important;
+  }
+
+  #navbarContent .nav-link {
+    text-align: left !important;
+  }
+
+  #navbarContent .navbar-text {
+    text-align: left !important;
+    display: block;
+    padding-left: 0.5rem;
+  }
+}
+
+/* Card de Perfil / Login */
+.card-login {
+  background-color: #e5dbff;
+  border: none;
+  border-radius: 15px;
+  max-width: 550px;
+  margin: 3rem auto;
+  overflow: hidden;
+  margin-top: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-header-custom {
+  background: linear-gradient(90deg, #6f42c1, #8553e6);
+  color: white;
+  padding: 1.5rem;
+  border: none;
+}
+
+.label-purple {
+  color: #6f42c1;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.form-control-lg {
+  border-radius: 10px;
+  border: 1px solid #d1b9ff;
+  font-size: 1rem;
+}
+
+/* Botones del Formulario */
+.btn-login-submit {
+  background: linear-gradient(90deg, #6f42c1, #9b59b6);
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.btn-login-submit:hover {
+  background: #6f42c1;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-purple {
+  border: 2px solid grey;
+  color: grey;
+  background: transparent;
+  font-weight: 600;
+}
+
+.btn-outline-purple:hover {
+  background-color: grey;
+  color: white;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+  #navbarContent .d-flex {
+    flex-direction: column !important;
+  }
+  .card-login {
+    margin: 1.5rem auto;
+    width: 95%;
+  }
+  nav .nav-link,
+  .navbar-text {
+    text-align: left !important;
+    padding: 0.5rem;
+  }
+}
+
+/* MODO DISCRETO  */
+body.modo-discreto {
+  background: #4e4d4d !important;
+  color: #d0d0d0 !important;
+  transition: all 0.5s ease;
+}
+body.modo-discreto .container,
+body.modo-discreto .container-fluid,
+body.modo-discreto .row {
+  background: transparent !important;
+}
+
+/* Navegador y buscador */
+body.modo-discreto .navbar,
+body.modo-discreto .buscador-personalizado {
+  background-color: #333333 !important;
+  color: #d0d0d0 !important;
+}
+body.modo-discreto .nav-link,
+body.modo-discreto .dropdown-item,
+body.modo-discreto .navbar-text {
+  color: #a8b0c0 !important;
+}
+
+/* Cards */
+body.modo-discreto .card-servicio {
+  background-color: #3a3a3a !important;
+  color: #d0d0d0 !important;
+  border: 1px solid grey !important;
+  transition:
+    background-color 0.3s ease,
+    filter 0.3s ease;
+}
+
+body.modo-discreto .card-servicio:hover {
+  background-color: #4a4a4a !important;
+}
+
+body.modo-discreto .card-servicio-body ul li {
+  filter: blur(1.5px);
+  transition: filter 0.3s ease;
+}
+
+body.modo-discreto .card-servicio-body ul li:hover {
+  filter: blur(0);
+}
+
+/* Chatbot */
+body.modo-discreto .chat-float {
+  background-color: grey !important;
+  color: #d0d0d0 !important;
+}
+
+/* MODO DISCRETO EDITAR PERFIL */
+body.modo-discreto .card-login {
+  background: #3a3a3a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #555 !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.modo-discreto .card-header-custom {
+  background: linear-gradient(90deg, #5a32a3, #7a4fc0);
+  color: white;
+}
+
+body.modo-discreto .form-control-lg {
+  background-color: #4a4a4a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid grey !important;
+  transition:
+    background-color 0.3s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+body.modo-discreto .form-control-lg:focus {
+  background-color: #555 !important;
+  color: white !important;
+  border-color: #9b59b6 !important;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.7);
+  transform: scale(1.02);
+}
+
+body.modo-discreto .label-purple {
+  color: #c1a0e1 !important;
+}
+
+body.modo-discreto .btn-login-submit {
+  background: linear-gradient(90deg, #6f42c1, #9b59b6);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+body.modo-discreto .btn-login-submit:hover {
+  background: #5a32a3 !important;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.modo-discreto .btn-outline-purple {
+  border-color: #888 !important;
+  color: #ccc !important;
+}
+
+body.modo-discreto .btn-outline-purple:hover {
+  background-color: #555 !important;
+  color: white !important;
+  transform: translateY(-2px) scale(1.03);
+}
+
+body.modo-discreto img.rounded-circle {
+  border: 2px solid #888 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Color de la letra del placeholder */
+body.modo-discreto input.form-control::placeholder {
+  color: grey !important;
+}
+
+/* ESTILOS  FOOTER */
+.custom-footer {
+  background-color: #6f42c1;
+  color: white;
+  margin-top: auto;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.custom-footer h5 {
+  color: #280c5b !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.custom-footer h5.text-danger {
+  color: #d13434 !important;
+}
+
+.footer-link {
+  color: #b8a2dd;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  transform: translateX(8px);
+}
+
+.custom-footer .bi {
+  transition: all 0.3s ease;
+}
+
+.custom-footer a.footer-link:has(.bi) {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: white;
+}
+
+.custom-footer a.footer-link:has(.bi):hover {
+  color: #b8a2dd;
+  transform: translateY(-5px);
+}
+
+.custom-footer hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+}
+
+.custom-footer p.small {
+  color: #b8a2dd !important;
+  font-size: 0.85rem;
+}
+
+.custom-footer .text-info strong {
+  color: #280c5b !important;
+  transition: 0.3s;
+}
+
+.custom-footer .text-info:hover strong {
+  color: #ffffff !important;
+}
+
+body.modo-discreto .custom-footer {
+  background-color: #1a1a1a !important;
+  border-top-color: #444 !important;
+}
+
+body.modo-discreto .custom-footer h5,
+body.modo-discreto .custom-footer .footer-link,
+body.modo-discreto .custom-footer .text-info strong {
+  color: #777 !important;
+  text-shadow: none;
+}
+
+/* MODO DISCRETO, botón emergencia borroso */
+body.modo-discreto .botonEmergencia {
+  filter: blur(3px);
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+body.modo-discreto .botonEmergencia:hover {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1.05);
+}
