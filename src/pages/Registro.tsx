@@ -111,8 +111,8 @@ function Registro() {
       <div className="container-fluid mt-2">
         <div className="d-flex justify-content-end pe-4">
           <button
-            className="btn text-black me-2 btn-modo-discreto"
-            onClick={() => setModoDiscreto((p) => !p)}
+            className="btn text-white me-2 btn-modo-discreto"
+            onClick={() => setModoDiscreto(!modoDiscreto)}
           >
             Modo discreto
           </button>

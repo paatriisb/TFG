@@ -9,13 +9,45 @@ function Login() {
   const [password, setPassword] = useState("");
   const [modoDiscreto, setModoDiscreto] = useState(false);
 
-  // salida rápida
+  // 🌙 cargar modo discreto desde localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("modoDiscreto");
+    if (saved === "true") {
+      setModoDiscreto(true);
+    }
+  }, []);
+
+  // 🌙 aplicar clase al body
+  useEffect(() => {
+    if (modoDiscreto) {
+      document.body.classList.add("modo-discreto");
+    } else {
+      document.body.classList.remove("modo-discreto");
+    }
+
+    localStorage.setItem("modoDiscreto", String(modoDiscreto));
+  }, [modoDiscreto]);
+
+  // ⌨️ atajo Ctrl + D
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key.toLowerCase() === "d") {
+        e.preventDefault();
+        setModoDiscreto((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // 🚪 salida rápida
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_blank");
   };
 
-  // submit login
+  // 🔐 submit login
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -25,8 +57,6 @@ function Login() {
     }
 
     console.log("Login:", { email, password });
-
-    // aquí luego puedes meter lógica real o validación
   };
 
   return (
@@ -34,7 +64,10 @@ function Login() {
       {/* HEADER */}
       <div className="container-fluid mt-2">
         <div className="d-flex justify-content-end pe-4">
-          <button className="btn text-black me-2 btn-modo-discreto">
+          <button
+            className="btn text-white me-2 btn-modo-discreto"
+            onClick={() => setModoDiscreto(!modoDiscreto)}
+          >
             Modo discreto
           </button>
 
@@ -133,68 +166,6 @@ function Login() {
       </div>
     </>
   );
-  useEffect(() => {
-    const saved = localStorage.getItem("modoDiscreto");
-
-    if (saved === "true") {
-      setModoDiscreto(true);
-      document.body.classList.add("modo-discreto");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (modoDiscreto) {
-      document.body.classList.add("modo-discreto");
-    } else {
-      document.body.classList.remove("modo-discreto");
-    }
-
-    localStorage.setItem("modoDiscreto", String(modoDiscreto));
-  }, [modoDiscreto]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key.toLowerCase() === "d") {
-        e.preventDefault();
-        setModoDiscreto((prev) => !prev);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-  useEffect(() => {
-    const saved = localStorage.getItem("modoDiscreto");
-
-    if (saved === "true") {
-      setModoDiscreto(true);
-      document.body.classList.add("modo-discreto");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (modoDiscreto) {
-      document.body.classList.add("modo-discreto");
-    } else {
-      document.body.classList.remove("modo-discreto");
-    }
-
-    localStorage.setItem("modoDiscreto", String(modoDiscreto));
-  }, [modoDiscreto]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key.toLowerCase() === "d") {
-        e.preventDefault();
-        setModoDiscreto((prev) => !prev);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 }
 
 export default Login;

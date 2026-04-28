@@ -22,12 +22,13 @@ const GuiasYrecursosdeapoyo = () => {
   }, [modoDiscreto]);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "d") {
         e.preventDefault();
         setModoDiscreto((prev) => !prev);
       }
     };
+
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
@@ -377,7 +378,11 @@ const GuiasYrecursosdeapoyo = () => {
                     ))
                   ) : item.tipo === "especial" ? (
                     <button
-                      onClick={() => navigate(item.link)}
+                      onClick={() => {
+                        if (item.link) {
+                          navigate(item.link);
+                        }
+                      }}
                       className="btn-recurso w-100 shadow-sm"
                       style={{ background: "#25d366" }}
                     >

@@ -1,15 +1,22 @@
 html,
-body {
+body,
+#root {
   height: 100%;
   margin: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background: linear-gradient(180deg, #e4cefd, #f9e9dd);
-  background-attachment: fixed;
+  pointer-events: none;
 }
 
 /* Navegador */
@@ -102,13 +109,11 @@ nav.navbar .nav-link {
 }
 
 .btn-modo-discreto {
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-  background: linear-gradient(90deg, #ffc107, #f9e31a);
+  background: linear-gradient(90deg, #6f42c1, #9b59b6) !important;
   color: white !important;
-  border: none;
+  border: 2px solid #490268 !important;
   padding: 0.75rem 1.5rem;
   font-size: 1.2rem;
-  font-weight: 600;
 }
 
 .btn-danger {
@@ -116,6 +121,7 @@ nav.navbar .nav-link {
   font-size: 1.2rem;
   background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
   color: white !important;
+  border: 2px solid #940404 !important;
 }
 
 .btn.btn-primary {
@@ -296,6 +302,7 @@ nav .nav-link {
   right: 20px;
   background-color: #5a32a3;
   color: white;
+  border: 2px solid #370080 !important;
   width: 60px;
   height: 60px;
   border-radius: 50%;

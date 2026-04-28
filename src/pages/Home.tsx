@@ -1,22 +1,19 @@
-import "../assets/css/index.css";
+import "../assets/css/principal.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
-  // 1. estado del modo discreto
   const [modoDiscreto, setModoDiscreto] = useState(false);
 
-  // 2. Cargar estado guardado en localStorage al iniciar
   useEffect(() => {
-    const saved = localStorage.getItem("modoDiscreto");
-    if (saved === "true") {
+    const guardarLocalStorage = localStorage.getItem("modoDiscreto");
+    if (guardarLocalStorage === "true") {
       setModoDiscreto(true);
       document.body.classList.add("modo-discreto");
     }
   }, []);
 
-  // 3. Aplicar cambios cuando cambia el estado
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -27,7 +24,6 @@ function Home() {
     localStorage.setItem("modoDiscreto", String(modoDiscreto));
   }, [modoDiscreto]);
 
-  // 4. Atajo teclado Ctrl + D
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "d") {
@@ -43,109 +39,107 @@ function Home() {
     };
   }, []);
 
-  // 5. botón salida rápida
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_blank");
   };
 
   return (
-    <>
-      <div className="container-fluid mt-2">
-        <div className="d-flex justify-content-end pe-4">
+    <div className="fondo">
+      <div className="container mt-2">
+        <div className="d-flex justify-content-end pe-2 pe-md-4 gap-2">
           <button
-            className="btn text-white me-2 btn-modo-discreto"
+            className="btn text-white btn-modo-discreto"
             onClick={() => setModoDiscreto((prev) => !prev)}
           >
             Modo discreto
           </button>
 
-          <button
-            className="btn text-white btn-danger"
-            style={{ background: "linear-gradient(90deg, #ff4c4c, #ff0000)" }}
-            onClick={salidaRapida}
-          >
+          <button className="btn text-white btn-danger" onClick={salidaRapida}>
             X
           </button>
         </div>
       </div>
-      <>
-        {/* Card */}
-        <div className="container-fluid mt-4 px-2">
-          <div className="card shadow border-0 card-principal">
-            {/* título */}
-            <div
-              className="card-header text-white"
-              style={{ backgroundColor: "#6f42c1", padding: "1rem" }}
-            >
-              <h4 className="card-title mb-0">Navegación segura</h4>
+
+      {/* Card */}
+      <div className="container mt-4 px-2 px-md-3">
+        <div className="card shadow border-0 card-principal mx-auto">
+          {/* título */}
+          <div className="card-header text-white text-center colorHeaderCard">
+            <h4 className="card-title mb-0">Navegación segura</h4>
+          </div>
+
+          {/* Contenido */}
+          <div className="card-body d-flex flex-column">
+            {/* Item 1 */}
+            <div className="item-card row align-items-center mb-3 text-center">
+              <div className="col-12 col-md-8">
+                <p className="titulo-item mb-0">
+                  · Borra tu historial de navegación
+                </p>
+              </div>
+              <div className="col-12 col-md-4 text-center mt-3 mt-md-0">
+                <span className="border rounded px-3 py-2 bg-light shadow-sm">
+                  <i className="bi bi-trash"></i>
+                </span>
+              </div>
             </div>
 
-            {/* Contenido */}
-            <div className="card-body">
-              <div className="mb-3">
-                <span className="fw-semibold">
-                  • Borra tu historial de navegación
+            {/* Item 2 */}
+            <div className="item-card row align-items-center mb-3 text-center">
+              <div className="col-12 col-md-8">
+                <p className="titulo-item mb-1">· Opción de salir rápido</p>
+                <p className="subtexto mb-2">
+                  Usa <strong>ESC</strong> o el botón:
+                </p>
+                <button className="btn btn-danger btn-sm mt-2">X</button>
+              </div>
+              <div className="col-12 col-md-4 text-center mt-3 mt-md-0">
+                <span className="border rounded px-3 py-2 bg-light shadow-sm">
+                  {" "}
+                  ESC
                 </span>
               </div>
+            </div>
 
-              <div className="mb-3 d-flex justify-content-between align-items-center">
-                <span className="fw-semibold">
-                  • Opción de salir rápido.
-                  <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mediante: botón escape
-                  (esc)
-                  <img
-                    src="https://us.123rf.com/450wm/nemalo/nemalo1602/nemalo160200083/54251697-colecci%C3%B3n-electr%C3%B3nica-detalle-del-teclado-de-ordenador-negro-con-esc-clave.jpg?ver=6"
-                    alt="esc"
-                    style={{ width: "100px", height: "50px" }}
-                  />
-                  <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o el siguiente botón:
-                  <button className="btn btn-danger btn-sm text-white">
-                    X
-                  </button>
-                </span>
-              </div>
-
-              <div className="mb-3 d-flex justify-content-between align-items-center">
-                <span className="fw-semibold">
-                  • Modo incógnito
-                  <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mediante: los botones
-                  (control + D)
-                  <img
-                    src="https://img.freepik.com/vector-premium/combinacion-teclas-ctrl-d-icono-linea-eficiencia-automatizacion-ahorro-tiempo-tareas-repetitivas-experiencia-usuario-software-computadora-icono-lineal-vectorial-negocios-publicidad_727385-7761.jpg"
-                    alt="controlD"
-                    style={{ width: "100px", height: "50px" }}
-                  />
-                  <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o el siguiente botón:
-                  <button className="btn btn-sm text-white btn-modo-discreto">
-                    Modo discreto
-                  </button>
-                </span>
-              </div>
-
-              {/* Botón Entrar */}
-              <div className="d-flex justify-content-center mt-4 mb-4 w-100">
-                <button
-                  onClick={() => navigate("/login")}
-                  className="btn px-5 py-2 text-white"
-                  style={{
-                    background: "linear-gradient(90deg, #6f42c1, #9b59b6)",
-                    border: "none",
-                    fontWeight: 600,
-                  }}
-                >
-                  Entrar
+            {/* Item 3 */}
+            <div className="item-card row align-items-center mb-3 text-center">
+              <div className="col-12 col-md-8">
+                <p className="titulo-item mb-1"> · Modo incógnito</p>
+                <p className="subtexto mb-2">
+                  Usa <strong>Ctrl + D</strong> o el botón:
+                </p>
+                <button className="btn btn-sm text-white btn-modo-discreto mt-2">
+                  Modo discreto
                 </button>
               </div>
+
+              <div className="col-12 col-md-4 text-center mt-3 mt-md-0">
+                <div className="d-flex justify-content-center align-items-center gap-2">
+                  <span className="border rounded px-3 py-2 bg-light shadow-sm">
+                    Ctrl
+                  </span>
+                  <span className="fw-bold">+</span>
+                  <span className="border rounded px-3 py-2 bg-light shadow-sm">
+                    D
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Botón abajo SIEMPRE */}
+            <div className="mt-auto text-center pt-3">
+              <button
+                onClick={() => navigate("/login")}
+                className="btn btn-entrar px-5 py-2 text-white"
+              >
+                Entrar
+              </button>
             </div>
           </div>
         </div>
-      </>
-    </>
+      </div>
+    </div>
   );
 }
 

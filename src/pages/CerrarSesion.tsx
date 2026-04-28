@@ -6,22 +6,17 @@ const CerrarSesion = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 1. Limpieza de datos (Lo que ya tenías)
     localStorage.removeItem("userToken");
     localStorage.removeItem("userData");
 
-    // 2. Lógica para bloquear el botón "Atrás" del navegador
-    // Insertamos un estado actual en el historial
-    window.history.pushState(null, null, window.location.href);
+    window.history.pushState(null, "", window.location.href);
 
     const bloquearRetroceso = () => {
-      // Si intentan ir atrás, volvemos a empujar el estado para que se queden aquí
-      window.history.pushState(null, null, window.location.href);
+      window.history.pushState(null, "", window.location.href);
     };
 
     window.addEventListener("popstate", bloquearRetroceso);
 
-    // Limpieza del evento al desmontar el componente
     return () => {
       window.removeEventListener("popstate", bloquearRetroceso);
     };

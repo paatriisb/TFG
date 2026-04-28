@@ -1,17 +1,22 @@
 html,
-body {
+body,
+#root {
   height: 100%;
   margin: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background: linear-gradient(180deg, #e4cefd, #f9e9dd);
-  background-attachment: fixed;
-  font-family: sans-serif;
-  transition: all 0.5s ease;
+  pointer-events: none;
 }
 
 nav.navbar {
@@ -53,13 +58,19 @@ nav.navbar {
 }
 
 .btn-modo-discreto {
-  background: linear-gradient(90deg, #ffc107, #f9e31a) !important;
+  background: linear-gradient(90deg, #6f42c1, #9b59b6) !important;
   color: white !important;
+  border: 2px solid #490268 !important;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
 }
 
 .btn-danger {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
   background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
   color: white !important;
+  border: 2px solid #940404 !important;
 }
 
 .card-login {
@@ -159,6 +170,7 @@ body.modo-discreto .form-check-label {
   bottom: 20px;
   right: 20px;
   background-color: #5a32a3;
+  border: 2px solid #370080 !important;
   color: white;
   width: 60px;
   height: 60px;

@@ -43,7 +43,7 @@ const Perfil = () => {
   }, [modoDiscreto]);
 
   // 2. ACTUALIZACIÓN DINÁMICA
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setUserData({
       ...userData,
@@ -52,7 +52,7 @@ const Perfil = () => {
   };
 
   // 3. GUARDADO
-  const guardarCambios = (e) => {
+  const guardarCambios = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     localStorage.setItem("usuario", JSON.stringify(userData));
     setIsEditing(false);

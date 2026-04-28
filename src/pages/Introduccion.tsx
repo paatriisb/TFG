@@ -22,12 +22,13 @@ const Introduccion = () => {
 
   // Efecto para el atajo CTRL + D
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "d") {
         e.preventDefault();
         setModoDiscreto((prev) => !prev);
       }
     };
+
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);

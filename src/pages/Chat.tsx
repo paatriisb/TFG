@@ -4,11 +4,19 @@ import "../assets/css/informacion.css";
 
 const ChatSeguro = () => {
   const navigate = useNavigate();
-  const chatBoxRef = useRef(null);
+  const chatBoxRef = useRef<HTMLDivElement | null>(null);
+  type Especialidad = "psicologa" | "abogada";
+  type Message = {
+    id: number;
+    text: string;
+    type: "sent" | "received";
+  };
 
   // --- ESTADOS ---
-  const [messages, setMessages] = useState([]);
-  const [especialidadActual, setEspecialidadActual] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [especialidadActual, setEspecialidadActual] = useState<
+    Especialidad | ""
+  >("");
   const [esperandoDecision, setEsperandoDecision] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);
@@ -17,7 +25,7 @@ const ChatSeguro = () => {
   );
 
   // --- CONFIGURACIÓN ---
-  const menus = {
+  const menus: Record<Especialidad, string> = {
     psicologa:
       "Elige una opción escribiendo el número:\n1. Técnicas de calma\n2. ¿Cómo gestionar el miedo?\n3. Redes de apoyo",
     abogada:
@@ -97,7 +105,7 @@ const ChatSeguro = () => {
   }, [modoDiscreto]);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "d") {
         e.preventDefault();
         setModoDiscreto((prev) => !prev);
@@ -119,14 +127,14 @@ const ChatSeguro = () => {
     window.open("https://www.google.com", "_newtab");
   };
 
-  const addMessage = (text, type) => {
+  const addMessage = (text: string, type: "sent" | "received") => {
     setMessages((prev) => [
       ...prev,
       { text, type, id: Date.now() + Math.random() },
     ]);
   };
 
-  const iniciarChat = (opcion) => {
+  const iniciarChat = (opcion: Especialidad) => {
     setEspecialidadActual(opcion);
     const lista = perfiles[opcion];
     const perfil = lista[Math.floor(Math.random() * lista.length)];
@@ -150,7 +158,7 @@ const ChatSeguro = () => {
     );
   };
 
-  const procesarEnvio = (e) => {
+  const procesarEnvio = (e: React.FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault();
     const mensaje = inputValue.trim().toLowerCase();
     if (!mensaje) return;
@@ -160,16 +168,22 @@ const ChatSeguro = () => {
 
     setTimeout(() => {
       if (esperandoDecision) {
+        // 👇 AQUÍ VA LA GUARD CLAUSE
+        if (!especialidadActual) return;
+
         if (mensaje === "sí" || mensaje === "si") {
           addMessage("Perfecto, aquí tienes más opciones:", "received");
+
           setTimeout(
             () => addMessage(menus[especialidadActual], "received"),
             600,
           );
+
           setEsperandoDecision(false);
         } else if (mensaje === "hablar") {
           const nueva =
             especialidadActual === "psicologa" ? "abogada" : "psicologa";
+
           iniciarChat(nueva);
           setEsperandoDecision(false);
         } else if (mensaje === "no") {
@@ -179,6 +193,7 @@ const ChatSeguro = () => {
         } else {
           addMessage("Responde con: sí / hablar / no", "received");
         }
+
         return;
       }
 
@@ -195,7 +210,7 @@ const ChatSeguro = () => {
 
       if (["1", "2", "3"].includes(mensaje)) {
         addMessage(
-          respuestasDetalladas[especialidadActual][mensaje],
+          (respuestasDetalladas as any)[especialidadActual][mensaje],
           "received",
         );
         setTimeout(() => {

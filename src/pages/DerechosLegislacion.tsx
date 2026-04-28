@@ -22,7 +22,7 @@ const DerechosLegislacion = () => {
   }, [modoDiscreto]);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "d") {
         e.preventDefault();
         setModoDiscreto((prev) => !prev);
