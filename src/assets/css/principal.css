@@ -6,7 +6,7 @@ body,
   margin: 0;
 }
 
-/* Color del fondo */
+/* COLOR DEL FONDO EN HOME.TSX */
 .fondo {
   min-height: 100vh;
   width: 100%;
@@ -15,7 +15,7 @@ body,
   background: linear-gradient(180deg, #e4cefd, #f9e9dd);
 }
 
-/* Card */
+/* CARD DEL HOME.TSX */
 .card-principal {
   width: 100%;
   max-width: 700px;
@@ -42,7 +42,7 @@ body,
   padding: 1rem !important;
 }
 
-/* Items del card */
+/* MINICARDS */
 .item-card {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 12px;
@@ -56,7 +56,7 @@ body,
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Texto de cada item del card */
+/* TEXTO DE CADA MINICARD */
 .titulo-item {
   font-size: 1.05rem;
   font-weight: 700;
@@ -69,7 +69,7 @@ body,
   margin: 0;
 }
 
-/* Botones */
+/* TODOS LOS BOTONES */
 .btn-entrar {
   background: linear-gradient(90deg, #6f42c1, #9b59b6);
   font-weight: 600;
@@ -110,18 +110,15 @@ body.modo-discreto .fondo {
   background: grey !important;
 }
 
-/* Header de la card */
 body.modo-discreto .card-principal .card-header {
   background-color: #460766 !important;
   color: grey !important;
 }
 
-/* Body de la card */
 body.modo-discreto .card-principal .card-body {
   background-color: transparent !important;
 }
 
-/* Items de la card */
 body.modo-discreto .card-principal .item-card {
   filter: none !important;
   background: #4c4b4b !important;
@@ -129,7 +126,6 @@ body.modo-discreto .card-principal .item-card {
   border: 1px solid #5a5a5a;
 }
 
-/* Botón de entrar */
 body.modo-discreto .btn-entrar {
   background: #460766;
 }
