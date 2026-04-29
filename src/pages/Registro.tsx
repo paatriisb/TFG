@@ -12,18 +12,16 @@ function Registro() {
   const [modoDiscreto, setModoDiscreto] = useState(false);
   const [mostrar, setMostrar] = useState(false);
 
-  // 🚪 salida rápida
+  // SALIDA RÁPIDA
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_blank");
   };
 
-  // 👁 mostrar/ocultar password
-  useEffect(() => {
-    // no hace falta DOM, lo controlamos con state
-  }, [mostrar]);
+  // MOSTRAR Y OCULTAR CONTRASEÑA
+  useEffect(() => {}, [mostrar]);
 
-  // 🌙 modo discreto
+  // MODO DISCRETO
   useEffect(() => {
     const saved = localStorage.getItem("modoDiscreto");
 
@@ -55,11 +53,9 @@ function Registro() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // 🧠 VALIDACIÓN + REGISTRO
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ya existe
     if (localStorage.getItem("emailRegistrado") === email && email !== "") {
       Swal.fire("Error", "Este correo ya existe", "error");
       return;
@@ -70,7 +66,6 @@ function Registro() {
       return;
     }
 
-    // seguridad contraseña
     let error = "";
 
     if (password.length < 8) {
@@ -95,7 +90,6 @@ function Registro() {
       return;
     }
 
-    // guardar
     localStorage.setItem("emailRegistrado", email);
     localStorage.setItem("passRegistrada", password);
     localStorage.setItem("usuario", "Patrii");
@@ -104,6 +98,38 @@ function Registro() {
       navigate("/login");
     });
   };
+
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
     <>
@@ -166,7 +192,7 @@ function Registro() {
                 />
               </div>
 
-              {/* PASSWORD */}
+              {/* CONTRASEÑA */}
               <div className="mb-3">
                 <label className="form-label fw-semibold label-purple">
                   CONTRASEÑA
@@ -181,7 +207,7 @@ function Registro() {
                 />
               </div>
 
-              {/* REPETIR PASSWORD */}
+              {/* REPETIR CONTRASEÑA */}
               <div className="mb-3">
                 <label className="form-label fw-semibold label-purple">
                   REPETIR CONTRASEÑA

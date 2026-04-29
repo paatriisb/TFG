@@ -12,7 +12,7 @@ const ChatSeguro = () => {
     type: "sent" | "received";
   };
 
-  // --- ESTADOS ---
+  // ESTADOS
   const [messages, setMessages] = useState<Message[]>([]);
   const [especialidadActual, setEspecialidadActual] = useState<
     Especialidad | ""
@@ -24,7 +24,6 @@ const ChatSeguro = () => {
     localStorage.getItem("modoDiscreto") === "true",
   );
 
-  // --- CONFIGURACIÓN ---
   const menus: Record<Especialidad, string> = {
     psicologa:
       "Elige una opción escribiendo el número:\n1. Técnicas de calma\n2. ¿Cómo gestionar el miedo?\n3. Redes de apoyo",
@@ -94,7 +93,7 @@ const ChatSeguro = () => {
     ],
   };
 
-  // --- EFECTOS ---
+  // EFECTOS
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -121,7 +120,6 @@ const ChatSeguro = () => {
     }
   }, [messages]);
 
-  // --- FUNCIONES ---
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_newtab");
@@ -168,7 +166,6 @@ const ChatSeguro = () => {
 
     setTimeout(() => {
       if (esperandoDecision) {
-        // 👇 AQUÍ VA LA GUARD CLAUSE
         if (!especialidadActual) return;
 
         if (mensaje === "sí" || mensaje === "si") {
@@ -228,9 +225,41 @@ const ChatSeguro = () => {
     }, 600);
   };
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
-      {/* Navegador */}
+      {/* NAVEGADOR */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -396,7 +425,7 @@ const ChatSeguro = () => {
         </div>
       </nav>
 
-      {/* CONTROLES RÁPIDOS */}
+      {/* BOTONES DEBAJO DEL NAVEGADOR */}
       <div className="container-fluid mt-3 px-2 px-md-4">
         <div className="d-flex justify-content-end pe-md-4 flex-shrink-0">
           <button
@@ -414,7 +443,7 @@ const ChatSeguro = () => {
         </div>
       </div>
 
-      {/* CHAT CENTRAL */}
+      {/* CHAT */}
       <div className="container mt-4 mb-5">
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
@@ -513,7 +542,7 @@ const ChatSeguro = () => {
         </div>
       </div>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">

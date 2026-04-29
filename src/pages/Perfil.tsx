@@ -65,6 +65,38 @@ const Perfil = () => {
     window.open("https://www.google.com", "_newtab");
   };
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
       {/* Navegador */}

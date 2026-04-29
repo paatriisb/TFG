@@ -526,6 +526,11 @@ nav .nav-link {
 }
 
 /* MODO DISCRETO  */
+body.modo-discreto::before {
+  background: #272525 !important;
+  opacity: 1;
+}
+
 body.modo-discreto {
   background: #4e4d4d !important;
   color: grey !important;

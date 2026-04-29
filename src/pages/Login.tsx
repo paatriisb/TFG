@@ -9,7 +9,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const [modoDiscreto, setModoDiscreto] = useState(false);
 
-  // 🌙 cargar modo discreto desde localStorage
   useEffect(() => {
     const saved = localStorage.getItem("modoDiscreto");
     if (saved === "true") {
@@ -17,7 +16,6 @@ function Login() {
     }
   }, []);
 
-  // 🌙 aplicar clase al body
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -28,7 +26,6 @@ function Login() {
     localStorage.setItem("modoDiscreto", String(modoDiscreto));
   }, [modoDiscreto]);
 
-  // ⌨️ atajo Ctrl + D
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "d") {
@@ -41,13 +38,12 @@ function Login() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // 🚪 salida rápida
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_blank");
   };
 
-  // 🔐 submit login
+  // ✅ AQUÍ ESTÁ LA PARTE IMPORTANTE
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -56,12 +52,56 @@ function Login() {
       return;
     }
 
-    console.log("Login:", { email, password });
+    // 🟢 Crear usuario completo
+    const usuario = {
+      nombre: email.split("@")[0], // nombre automático desde email
+      email: email,
+      password: password,
+    };
+
+    // 🟢 Guardar en localStorage
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    console.log("Usuario guardado:", usuario);
+
+    // 🟢 Ir a la siguiente página
+    navigate("/emergencia");
   };
+
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
     <>
-      {/* HEADER */}
       <div className="container-fluid mt-2">
         <div className="d-flex justify-content-end pe-4">
           <button
@@ -81,7 +121,6 @@ function Login() {
         </div>
       </div>
 
-      {/* LOGIN CARD */}
       <div className="container px-3 mt-4">
         <div className="card card-login shadow">
           <div className="card-header-custom d-flex justify-content-between align-items-center shadow-sm">
@@ -103,7 +142,6 @@ function Login() {
 
           <div className="card-body p-4">
             <form onSubmit={handleSubmit}>
-              {/* EMAIL */}
               <div className="mb-3">
                 <label className="form-label fw-semibold label-purple">
                   CORREO ELECTRÓNICO
@@ -118,7 +156,6 @@ function Login() {
                 />
               </div>
 
-              {/* PASSWORD */}
               <div className="mb-3">
                 <label className="form-label fw-semibold label-purple">
                   CONTRASEÑA
@@ -133,7 +170,6 @@ function Login() {
                 />
               </div>
 
-              {/* BOTONES */}
               <div className="d-grid gap-3 mt-4">
                 <button
                   type="submit"
@@ -153,6 +189,10 @@ function Login() {
                 <div className="text-center">
                   <a
                     href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate("/recuperacion");
+                    }}
                     className="forgot-password fw-bold"
                     style={{ color: "#6f42c1", textDecoration: "none" }}
                   >

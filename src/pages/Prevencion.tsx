@@ -5,13 +5,13 @@ import "../assets/css/informacion.css";
 const PrevencionSeguridad = () => {
   const navigate = useNavigate();
 
-  // --- ESTADOS ---
+  // ESTADOS
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [modoDiscreto, setModoDiscreto] = useState(
     localStorage.getItem("modoDiscreto") === "true",
   );
 
-  // --- LÓGICA MODO DISCRETO ---
+  // MODO DISCRETO
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -36,13 +36,12 @@ const PrevencionSeguridad = () => {
     };
   }, []);
 
-  // --- FUNCIONES ---
+  // SALIDA RÁPIDA
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_newtab");
   };
 
-  // --- DATOS DE LAS TARJETAS ---
   const tarjetasPrevencion = [
     {
       titulo: "Consejos para detener señales de violencia o maltrato",
@@ -196,14 +195,45 @@ const PrevencionSeguridad = () => {
     },
   ];
 
-  // Filtrado reactivo
   const tarjetasFiltradas = tarjetasPrevencion.filter((tarjeta) =>
     tarjeta.titulo.toLowerCase().includes(terminoBusqueda.toLowerCase()),
   );
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
-      {/* Navegador */}
+      {/* NAVEGADOR */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -369,7 +399,7 @@ const PrevencionSeguridad = () => {
         </div>
       </nav>
 
-      {/* BARRA DE BÚSQUEDA Y BOTONES DE CONTROL */}
+      {/* BUSCADOR Y BOTONES */}
       <div className="colorFondo">
         <div className="container-fluid mt-3 px-2 px-md-4">
           <div className="d-flex justify-content-between align-items-center flex-nowrap gap-2">
@@ -407,7 +437,7 @@ const PrevencionSeguridad = () => {
         <br />
       </div>
 
-      {/* CONTENIDO PRINCIPAL */}
+      {/* CONTENIDO */}
       <div className="container mt-4 mb-5">
         <h1 className="titulo-seccion">INFORMACIÓN - PREVENCIÓN Y SEGURIDAD</h1>
         <div className="row g-4 mt-2">
@@ -438,7 +468,7 @@ const PrevencionSeguridad = () => {
         </div>
       </div>
 
-      {/* BOTON FLOTANTE CHAT */}
+      {/* CHAT */}
       <div
         className="chat-float"
         style={{ cursor: "pointer" }}
@@ -447,7 +477,7 @@ const PrevencionSeguridad = () => {
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">

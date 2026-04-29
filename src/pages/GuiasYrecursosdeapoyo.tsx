@@ -5,13 +5,13 @@ import "../assets/css/informacion.css";
 const GuiasYrecursosdeapoyo = () => {
   const navigate = useNavigate();
 
-  // --- ESTADOS ---
+  // ESTADOS
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [modoDiscreto, setModoDiscreto] = useState(
     localStorage.getItem("modoDiscreto") === "true",
   );
 
-  // --- LÓGICA MODO DISCRETO ---
+  // MODO DISCRETO
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -33,13 +33,12 @@ const GuiasYrecursosdeapoyo = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // --- FUNCIONES ---
+  // SALIDA RÁPIDA
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_newtab");
   };
 
-  // --- DATOS DE LAS TARJETAS (Para el buscador) ---
   const recursos = [
     {
       titulo: "Primeros Pasos: ¿Qué hacer?",
@@ -121,6 +120,38 @@ const GuiasYrecursosdeapoyo = () => {
     r.titulo.toLowerCase().includes(terminoBusqueda.toLowerCase()),
   );
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
       <style>{`
@@ -130,7 +161,7 @@ const GuiasYrecursosdeapoyo = () => {
         .btn-recurso:hover { background-color: #563d7c; color: white; }
       `}</style>
 
-      {/* Navegador */}
+      {/* NAVEGADOR */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -411,7 +442,7 @@ const GuiasYrecursosdeapoyo = () => {
         </div>
       </div>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">

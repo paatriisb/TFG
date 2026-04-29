@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// Asegúrate de que la ruta apunte a tu CSS original
 import "../assets/css/servicios.css";
 
 const Psicologia = () => {
   const navigate = useNavigate();
 
-  // --- LÓGICA MODO DISCRETO ---
+  // MODO DISCRETO
   const [modoDiscreto, setModoDiscreto] = useState(
     localStorage.getItem("modoDiscreto") === "true",
   );
@@ -20,15 +19,47 @@ const Psicologia = () => {
     localStorage.setItem("modoDiscreto", String(modoDiscreto));
   }, [modoDiscreto]);
 
-  // --- FUNCIÓN SALIDA RÁPIDA ---
+  // SALIDA RÁPIDA
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_newtab");
   };
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
-      {/* Navegador */}
+      {/* NAVEGADOR */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -194,7 +225,7 @@ const Psicologia = () => {
         </div>
       </nav>
 
-      {/* Botones de Control */}
+      {/* BOTONES */}
       <div className="container-fluid mt-3 px-2 px-md-4">
         <div className="d-flex justify-content-end pe-md-4 flex-shrink-0">
           <button
@@ -213,12 +244,11 @@ const Psicologia = () => {
         </div>
       </div>
 
-      {/* Cuerpo Principal - PSICOLOGÍA */}
       <div className="container mt-4 mb-5">
         <h1 className="titulo-seccion">SERVICIOS - PSICOLOGÍA</h1>
 
         <div className="row g-4 mt-2">
-          {/* Card 1 */}
+          {/* CARD 1 */}
           <div className="col-md-6 col-lg-4">
             <div className="card-servicio shadow">
               <div className="card-servicio-header">Centro de Apoyo Madrid</div>
@@ -241,7 +271,7 @@ const Psicologia = () => {
             </div>
           </div>
 
-          {/* Card 2 */}
+          {/* CARD 2 */}
           <div className="col-md-6 col-lg-4">
             <div className="card-servicio shadow">
               <div className="card-servicio-header">Gabinete Psicológico</div>
@@ -264,7 +294,7 @@ const Psicologia = () => {
             </div>
           </div>
 
-          {/* Card 3 */}
+          {/* CARD 3 */}
           <div className="col-md-6 col-lg-4">
             <div className="card-servicio shadow">
               <div className="card-servicio-header">Atención Especializada</div>
@@ -289,7 +319,7 @@ const Psicologia = () => {
         </div>
       </div>
 
-      {/* Chat flotante */}
+      {/* CHAT */}
       <div
         className="chat-float"
         style={{ cursor: "pointer" }}
@@ -298,7 +328,7 @@ const Psicologia = () => {
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">

@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import Swal from "sweetalert2";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import "../assets/css/servicios.css";
 import { useNavigate } from "react-router-dom";
-import "../assets/css/informacion.css";
 
-const DerechosLegislacion = () => {
+const Emergencia = () => {
+  const [pasoActual, setPasoActual] = useState(0);
+  const [mostrarAyuda, setMostrarAyuda] = useState(false);
+  const [tiempo, setTiempo] = useState<number | null>(null);
+  const [womanLocation, setWomanLocation] = useState<any>(null);
+
+  const contenedorRef = useRef<HTMLDivElement>(null);
+  const mapaPatrullaRef = useRef<HTMLDivElement>(null);
+
   const navigate = useNavigate();
-
-  // ESTADOS
-  const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [modoDiscreto, setModoDiscreto] = useState(
     localStorage.getItem("modoDiscreto") === "true",
   );
 
-  // MODO DISCRETO
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -21,180 +28,222 @@ const DerechosLegislacion = () => {
     localStorage.setItem("modoDiscreto", String(modoDiscreto));
   }, [modoDiscreto]);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key.toLowerCase() === "d") {
-        e.preventDefault();
-        setModoDiscreto((prev) => !prev);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  // SALIDA RÁPIDA
-  const salidaRapida = () => {
-    window.location.replace("https://www.google.com");
-    window.open("https://www.google.com", "_newtab");
-  };
-
-  const tarjetasDerechos = [
-    {
-      titulo: "Derechos Fundamentales de la Víctima",
-      puntos: [
-        {
-          negrita: "Derecho a la información:",
-          texto:
-            "Recibir asesoramiento pleno sobre tu situación jurídica y los recursos sociales disponibles.",
-        },
-        {
-          negrita: "Asistencia jurídica:",
-          texto:
-            "Acceso a defensa legal gratuita y especializada de forma inmediata.",
-        },
-        {
-          negrita: "Atención integral:",
-          texto:
-            "Derecho a servicios sociales, sanitarios y de emergencia para la recuperación física y psicológica.",
-        },
-        {
-          negrita: "Protección de datos:",
-          texto:
-            "Salvaguarda de tu identidad y domicilio durante todo el proceso judicial.",
-        },
-      ],
-    },
-    {
-      titulo: "Marco Legal: Ley Integral (Orgánica 1/2004)",
-      puntos: [
-        {
-          negrita: "Objeto de la ley:",
-          texto:
-            "Medidas de protección integral contra la violencia ejercida por parejas o ex-parejas.",
-        },
-        {
-          negrita: "Unidades Especializadas:",
-          texto:
-            "Creación de Juzgados de Violencia sobre la Mujer para una atención focalizada.",
-        },
-        {
-          negrita: "Derechos Laborales:",
-          texto:
-            "Posibilidad de reducción de jornada, movilidad geográfica o suspensión de la relación laboral.",
-        },
-        {
-          negrita: "Derecho a la vivienda:",
-          texto:
-            "Prioridad en el acceso a viviendas protegidas y residencias públicas.",
-        },
-      ],
-    },
-    {
-      titulo: "Órdenes de Protección y Medidas Cautelares",
-      puntos: [
-        {
-          negrita: "Orden de alejamiento:",
-          texto:
-            "Prohibición de aproximación y comunicación del agresor con la víctima.",
-        },
-        {
-          negrita: "Medidas penales:",
-          texto:
-            "Atribución del uso de la vivienda familiar y custodia de menores a la víctima.",
-        },
-        {
-          negrita: "Protección policial:",
-          texto:
-            "Seguimiento y vigilancia por parte de unidades policiales especializadas (UFAM/EMUME.",
-        },
-        {
-          negrita: "Dispositivos telemáticos:",
-          texto:
-            "Instalación de sistemas de control (pulseras) para verificar el cumplimiento del alejamiento.",
-        },
-      ],
-    },
-    {
-      titulo: "Derechos en Situación de Extranjería",
-      puntos: [
-        {
-          negrita: "Autorización de residencia:",
-          texto:
-            "Posibilidad de solicitar residencia y trabajo por circunstancias excepcionales tras una denuncia.",
-        },
-        {
-          negrita: "No expulsión:",
-          texto:
-            "Suspensión de expedientes administrativos sancionadores por estancia irregular durante el proceso.",
-        },
-        {
-          negrita: "Intérprete gratuito:",
-          texto:
-            "Derecho a traducción y asistencia lingüística en todos los trámites judiciales.",
-        },
-        {
-          negrita: "Acceso a ayudas:",
-          texto:
-            "Derecho a las mismas prestaciones de emergencia que el resto de las víctimas residentes.",
-        },
-      ],
-    },
-    {
-      titulo: "Procedimiento Legal y Denuncia",
-      puntos: [
-        {
-          negrita: "Lugar de presentación:",
-          texto:
-            "Comisaría de Policía, Cuartel de la Guardia Civil o Juzgado de Guardia.",
-        },
-        {
-          negrita: "Derecho a no declarar:",
-          texto:
-            "Exención del deber de declarar contra el cónyuge o pariente (Art. 416 LECrim).",
-        },
-        {
-          negrita: "Parte de lesiones:",
-          texto:
-            "Obligatoriedad de los centros médicos de remitir al juzgado cualquier sospecha de agresión.",
-        },
-        {
-          negrita: "Acompañamiento:",
-          texto:
-            "Derecho a estar acompañada por una persona de confianza durante la toma de declaración.",
-        },
-      ],
-    },
-    {
-      titulo: "Ayudas Económicas y Subvenciones",
-      puntos: [
-        {
-          negrita: "RAI (Renta Activa de Inserción):",
-          texto:
-            "Ayuda mensual específica para víctimas de violencia con dificultades económicas.",
-        },
-        {
-          negrita: "Artículo 27:",
-          texto:
-            "Ayuda de pago único para víctimas con especiales dificultades de empleabilidad por edad o discapacidad.",
-        },
-        {
-          negrita: "Bonificaciones fiscales:",
-          texto:
-            "Desgravaciones y beneficios en el IRPF por situaciones derivadas de la violencia.",
-        },
-        {
-          negrita: "Fondo de Garantía:",
-          texto:
-            "Pago de alimentos y pensiones impagadas por parte del agresor bajo ciertas condiciones.",
-        },
-      ],
-    },
+  const preguntas = [
+    "¿Estás en un lugar seguro ahora mismo?",
+    "¿Necesitas asistencia médica urgente?",
+    "¿El agresor está en la vivienda?",
+    "¿El agresor tiene acceso a algún tipo de arma?",
+    "¿Hay menores a tu cargo en este momento?",
+    "¿Puedes hablar ahora mismo sin ser escuchada?",
+    "¿Has sufrido violencia física hoy?",
+    "¿Tienes heridas visibles?",
+    "¿Conoces la dirección exacta donde te encuentras?",
+    "¿Deseas que activemos el protocolo de intervención?",
   ];
 
-  // BUSCADOR
-  const tarjetasFiltradas = tarjetasDerechos.filter((tarjeta) =>
-    tarjeta.titulo.toLowerCase().includes(terminoBusqueda.toLowerCase()),
-  );
+  // ================= MODO DISCRETO =================
+  useEffect(() => {
+    if (localStorage.getItem("modoDiscreto") === "true") {
+      document.body.classList.add("modo-discreto");
+    }
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key.toLowerCase() === "d") {
+        e.preventDefault();
+        toggleModo();
+      }
+    };
+
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
+  const toggleModo = () => {
+    document.body.classList.toggle("modo-discreto");
+    localStorage.setItem(
+      "modoDiscreto",
+      document.body.classList.contains("modo-discreto").toString(),
+    );
+  };
+
+  // ================= SALIDA RÁPIDA =================
+  const salidaRapida = () => {
+    window.location.replace("https://www.google.com");
+    window.open("https://www.google.com", "_blank");
+  };
+
+  // ================= BOTÓN PÁNICO =================
+  const activarPanico = () => {
+    Swal.fire({
+      title: "¿ESTÁS SEGURA?",
+      html: 'Se enviará una patrulla de inmediato.<div id="mapa-alert" style="height:200px;margin-top:15px;border-radius:12px;"></div>',
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff0000",
+      confirmButtonText: "SÍ, ENVIAR AYUDA",
+
+      willOpen: () => {
+        if (!navigator.geolocation) {
+          Swal.showValidationMessage("Tu navegador no permite geolocalización");
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const loc: [number, number] = [
+              pos.coords.latitude,
+              pos.coords.longitude,
+            ];
+
+            setWomanLocation(loc);
+
+            const map = L.map("mapa-alert").setView(loc, 16);
+
+            L.tileLayer(
+              "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            ).addTo(map);
+
+            L.marker(loc).addTo(map);
+          },
+
+          (err) => {
+            console.error(err);
+
+            Swal.showValidationMessage(
+              "No se pudo obtener tu ubicación real. Activa GPS y permisos.",
+            );
+          },
+
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
+          },
+        );
+      },
+    }).then((res) => {
+      if (!res.isConfirmed) return;
+
+      const cont = contenedorRef.current;
+      if (!cont) return;
+
+      cont.style.display = "block";
+      cont.innerHTML = "";
+
+      // 🔥 IMPORTANTE: usa GPS REAL si existe
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const loc: [number, number] = [
+            pos.coords.latitude,
+            pos.coords.longitude,
+          ];
+
+          const map = L.map(cont).setView(loc, 16);
+
+          L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          ).addTo(map);
+
+          const icon = L.icon({
+            iconUrl:
+              "https://cdn-icons-png.flaticon.com/512/11107/11107554.png",
+            iconSize: [45, 45],
+            iconAnchor: [22, 45],
+          });
+
+          L.marker(loc, { icon }).addTo(map).bindPopup("<b>ESTÁS AQUÍ</b>");
+        },
+
+        () => {
+          Swal.fire("Error", "No se pudo obtener tu ubicación real", "error");
+        },
+
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        },
+      );
+    });
+  };
+
+  // ================= CUESTIONARIO =================
+  const siguientePregunta = () => {
+    if (pasoActual < preguntas.length - 1) {
+      setPasoActual(pasoActual + 1);
+      window.scrollBy({ top: 30, behavior: "smooth" });
+    } else {
+      setMostrarAyuda(true);
+      setTiempo(2);
+      setTimeout(dibujarMapaPatrulla, 300);
+    }
+  };
+
+  // ================= MAPA PATRULLA =================
+  const dibujarMapaPatrulla = () => {
+    const div = mapaPatrullaRef.current;
+    if (!div) return;
+
+    div.innerHTML = "";
+
+    if (!navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const centro: [number, number] = [
+          pos.coords.latitude,
+          pos.coords.longitude,
+        ];
+
+        const map = L.map(div).setView(centro, 16);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+          map,
+        );
+
+        // 🚓 ICONO MÁS PEQUEÑO (COCHE PATRULLA)
+        const icono = L.icon({
+          iconUrl: "https://cdn-icons-png.flaticon.com/512/1048/1048310.png",
+          iconSize: [30, 30], // 👈 más pequeño
+          iconAnchor: [15, 15],
+        });
+
+        // posición inicial ligeramente alejada
+        let marker = L.marker([centro[0] - 0.002, centro[1] - 0.002], {
+          icon: icono,
+        }).addTo(map);
+
+        let frame = 0;
+
+        let anim = setInterval(() => {
+          frame++;
+
+          let current = marker.getLatLng();
+
+          // 🚨 movimiento suave (NO “vuela”)
+          let newLat = current.lat + (centro[0] - current.lat) * 0.08;
+          let newLng = current.lng + (centro[1] - current.lng) * 0.08;
+
+          marker.setLatLng([newLat, newLng]);
+
+          if (frame >= 60) {
+            clearInterval(anim);
+            marker.bindPopup("<b>LLEGANDO</b>").openPopup();
+          }
+        }, 300);
+      },
+
+      () => {
+        console.log("No se pudo obtener ubicación para patrulla");
+      },
+
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      },
+    );
+  };
 
   // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
   useEffect(() => {
@@ -230,7 +279,7 @@ const DerechosLegislacion = () => {
 
   return (
     <>
-      {/* NAVEGADOR */}
+      {/* Navegador */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -396,85 +445,135 @@ const DerechosLegislacion = () => {
         </div>
       </nav>
 
-      {/* BUSCADOR Y BOTONES */}
-      <div className="colorFondo">
-        <div className="container-fluid mt-3 px-2 px-md-4">
-          <div className="d-flex justify-content-between align-items-center flex-nowrap gap-2">
-            <div className="buscador-personalizado shadow-sm flex-grow-1">
-              <div className="input-group h-100">
-                <span className="input-group-text bg-white border-end-0">
-                  <i className="bi bi-search" style={{ color: "#6f42c1" }}></i>
-                </span>
-                <input
-                  type="text"
-                  className="form-control border-start-0 ps-1"
-                  placeholder="Buscar derechos o trámites..."
-                  value={terminoBusqueda}
-                  onChange={(e) => setTerminoBusqueda(e.target.value)}
-                />
-              </div>
-            </div>
+      {/* --- BOTONES SUPERIORES  */}
+      <div className="container-fluid mt-3 px-2 px-md-4">
+        <div className="d-flex justify-content-end pe-md-4 flex-shrink-0">
+          <button
+            className="btn text-white me-2 btn-modo-discreto"
+            onClick={() => setModoDiscreto(!modoDiscreto)}
+          >
+            Modo discreto
+          </button>
+          <button
+            className="btn text-white btn-danger btn-x-salir"
+            style={{ background: "linear-gradient(90deg, #ff4c4c, #ff0000)" }}
+            onClick={salidaRapida}
+          >
+            X
+          </button>
+        </div>
+      </div>
 
-            <div className="d-flex justify-content-end pe-md-4 flex-shrink-0">
+      {/* BOTÓN EMERGENCIA */}
+      <div className="text-center mb-4">
+        <button
+          id="BOTON-PANICO-REAL"
+          onClick={activarPanico}
+          style={{
+            padding: "30px 80px",
+            fontSize: "40px",
+            fontWeight: "900",
+            color: "white",
+            background: "#ff0000",
+            border: "6px solid white",
+            borderRadius: "15px",
+          }}
+        >
+          EMERGENCIA
+        </button>
+      </div>
+
+      {/* MAPA */}
+      <div className="d-flex justify-content-center mb-5">
+        <div
+          className="card shadow"
+          style={{
+            width: "350px",
+            borderRadius: "20px",
+            border: "3px solid #6f42c1",
+          }}
+        >
+          <div className="card-body p-0">
+            <div
+              ref={contenedorRef}
+              style={{
+                display: "none",
+                width: "100%",
+                height: "320px",
+                borderRadius: "20px",
+                overflow: "hidden",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* ================= CUESTIONARIO CON CARD ================= */}
+      {!mostrarAyuda ? (
+        <div className="d-flex justify-content-center">
+          <div
+            className="card shadow"
+            style={{
+              width: "450px",
+              borderRadius: "25px",
+              border: "6px solid #6f42c1",
+              padding: "25px",
+              textAlign: "center",
+            }}
+          >
+            <h4 className="mb-4">{preguntas[pasoActual]}</h4>
+
+            <div className="d-flex gap-3 justify-content-center">
               <button
-                className="btn text-white me-2 btn-modo-discreto"
-                onClick={() => setModoDiscreto(!modoDiscreto)}
+                className="btn"
+                style={{
+                  backgroundColor: "#6f42c1",
+                  color: "white",
+                  fontWeight: "700",
+                  borderRadius: "12px",
+                  padding: "10px 30px",
+                }}
+                onClick={siguientePregunta}
               >
-                Modo discreto
+                SÍ
               </button>
+
               <button
-                className="btn text-white btn-danger btn-panico"
-                onClick={salidaRapida}
+                className="btn btn-outline-dark"
+                style={{
+                  borderRadius: "12px",
+                  padding: "10px 30px",
+                  fontWeight: "700",
+                }}
+                onClick={siguientePregunta}
               >
-                X
+                NO
               </button>
             </div>
           </div>
         </div>
-        <br />
-      </div>
+      ) : (
+        <div className="text-center">
+          <h3>AYUDA EN CAMINO</h3>
 
-      {/* CONTENIDO PRINCIPAL */}
-      <div className="container mt-4 mb-5">
-        <h1 className="titulo-seccion">INFORMACIÓN - DERECHOS Y LEGISLACIÓN</h1>
-        <div className="row g-4 mt-2">
-          {tarjetasFiltradas.length > 0 ? (
-            tarjetasFiltradas.map((tarjeta, index) => (
-              <div className="col-md-6 col-lg-4" key={index}>
-                <div className="card-servicio shadow h-100">
-                  <div className="card-servicio-header">{tarjeta.titulo}</div>
-                  <div className="card-servicio-body">
-                    <ul>
-                      {tarjeta.puntos.map((punto, idx) => (
-                        <li key={idx}>
-                          <strong>{punto.negrita}</strong> {punto.texto}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="col-12 text-center mt-5">
-              <p className="text-muted">
-                No se encontraron resultados para "{terminoBusqueda}"
-              </p>
-            </div>
-          )}
+          <div className="alert alert-warning mt-3">
+            Patrulla más cercana: {tiempo} min
+          </div>
+
+          <div
+            ref={mapaPatrullaRef}
+            style={{ height: "320px", marginTop: "20px" }}
+          />
         </div>
-      </div>
+      )}
 
       {/* CHAT */}
-      <div
-        className="chat-float"
-        style={{ cursor: "pointer" }}
-        onClick={() => navigate("/chat")}
-      >
-        <i className="bi bi-chat-dots-fill"></i>
-      </div>
-
-      {/* FOOTER */}
+      <a href="/chat" className="text-decoration-none">
+        <div className="chat-float">
+          <i className="bi bi-chat-dots-fill"></i>
+        </div>
+      </a>
+      {/* FOOTER COMPLETO */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
@@ -558,7 +657,7 @@ const DerechosLegislacion = () => {
           <div className="row align-items-center">
             <div className="col-md-7 col-lg-8">
               <p className="small">
-                © 2026 Todos los derechos reservados:{" "}
+                ©️ 2026 Todos los derechos reservados:{" "}
                 <strong className="text-info">016SEGURO</strong>
               </p>
             </div>
@@ -575,4 +674,4 @@ const DerechosLegislacion = () => {
   );
 };
 
-export default DerechosLegislacion;
+export default Emergencia;

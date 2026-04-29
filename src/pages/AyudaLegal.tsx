@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// Asegúrate de que el archivo servicios.css tenga exactamente el mismo contenido que tu CSS original
 import "../assets/css/servicios.css";
 
 const AyudaLegal = () => {
   const navigate = useNavigate();
 
-  // MODO DISCRETO (Lógica necesaria para que funcione en React)
   const [modoDiscreto, setModoDiscreto] = useState(
     localStorage.getItem("modoDiscreto") === "true",
   );
 
+  // MODO DISCRETO
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -26,9 +25,41 @@ const AyudaLegal = () => {
     window.open("https://www.google.com", "_newtab");
   };
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
-      {/* Navegador */}
+      {/* NAVEGADOR */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -194,7 +225,7 @@ const AyudaLegal = () => {
         </div>
       </nav>
 
-      {/* Botones modo discreto y X - TAL CUAL TU HTML */}
+      {/* BOTONES DEBAJO DEL NAVEGADOR */}
       <div className="container-fluid mt-3 px-2 px-md-4">
         <div className="d-flex justify-content-end pe-md-4 flex-shrink-0">
           <button
@@ -213,7 +244,7 @@ const AyudaLegal = () => {
         </div>
       </div>
 
-      {/* Contenedor Principal - TAL CUAL TU HTML */}
+      {/* CONTENIDO PRINCIPAL */}
       <div className="container mt-4 mb-5">
         <h1 className="titulo-seccion">SERVICIOS - AYUDA LEGAL</h1>
         <div className="row g-4 mt-2">
@@ -283,7 +314,7 @@ const AyudaLegal = () => {
         </div>
       </div>
 
-      {/* Chat flotante - TAL CUAL TU HTML */}
+      {/* CHAT*/}
       <div
         className="chat-float"
         style={{ cursor: "pointer" }}
@@ -292,7 +323,7 @@ const AyudaLegal = () => {
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">

@@ -5,12 +5,11 @@ import "../assets/css/informacion.css";
 const Introduccion = () => {
   const navigate = useNavigate();
 
-  // Estado para el Modo Discreto
+  // MODO DISCRETO
   const [modoDiscreto, setModoDiscreto] = useState(
     localStorage.getItem("modoDiscreto") === "true",
   );
 
-  // Efecto para la clase del body y localStorage
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -20,7 +19,7 @@ const Introduccion = () => {
     localStorage.setItem("modoDiscreto", String(modoDiscreto));
   }, [modoDiscreto]);
 
-  // Efecto para el atajo CTRL + D
+  // PARA EL CTRL + D
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === "d") {
@@ -33,16 +32,47 @@ const Introduccion = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Función de salida rápida (Botón X)
+  // SALIDA RÁPIDA
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_newtab");
   };
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
-      {/* Navegador */}
-      {/* Navegador */}
+      {/* NAVEGADOR */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -208,7 +238,7 @@ const Introduccion = () => {
         </div>
       </nav>
 
-      {/* Controles rápidos */}
+      {/* BOTONES */}
       <div className="container-fluid mt-3 px-2 px-md-4">
         <div className="d-flex justify-content-end pe-md-4 flex-shrink-0">
           <button
@@ -229,7 +259,7 @@ const Introduccion = () => {
       <div className="container mt-5 mb-5">
         <h1 className="titulo-seccion text-center mb-4" id="bienvenida"></h1>
 
-        {/* Estadísticas */}
+        {/* ESTADÍSTICAS */}
         <div className="row g-4 mt-4">
           <h2 className="text-center fw-bold mb-4 texto-morado">
             ESTADÍSTICAS RECIENTES
@@ -272,7 +302,7 @@ const Introduccion = () => {
           </div>
         </div>
 
-        {/* Consejos */}
+        {/* CONSEJOS */}
         <div className="row mt-5 g-4">
           <h2 className="text-center fw-bold mb-4 texto-morado">
             CONSEJOS DE SEGURIDAD
@@ -307,7 +337,7 @@ const Introduccion = () => {
         </div>
       </div>
 
-      {/* Botón Flotante que lleva al Chat.tsx */}
+      {/* CHAT */}
       <div
         className="chat-float"
         style={{ cursor: "pointer" }}
@@ -316,7 +346,7 @@ const Introduccion = () => {
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">

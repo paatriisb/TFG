@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../assets/css/informacion.css"; // Asegúrate de que los estilos personalizados estén aquí
+import "../assets/css/informacion.css";
 
 const Testimonios = () => {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ const Testimonios = () => {
     localStorage.getItem("modoDiscreto") === "true",
   );
 
-  // --- LÓGICA MODO DISCRETO ---
+  // MODO DISCRETO
   useEffect(() => {
     if (modoDiscreto) {
       document.body.classList.add("modo-discreto");
@@ -33,15 +33,47 @@ const Testimonios = () => {
     };
   }, []);
 
-  // --- FUNCIONES ---
+  // SALIDA RÁPIDA
   const salidaRapida = () => {
     window.location.replace("https://www.google.com");
     window.open("https://www.google.com", "_newtab");
   };
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
-      {/* Navegador */}
+      {/* NAVEGADOR */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
@@ -207,7 +239,7 @@ const Testimonios = () => {
         </div>
       </nav>
 
-      {/* BOTONES DE CONTROL SUPERIOR */}
+      {/* BOTONES */}
       <div className="container-fluid mt-3 px-2 px-md-4">
         <div className="d-flex justify-content-end pe-md-4 flex-shrink-0">
           <button
@@ -225,7 +257,7 @@ const Testimonios = () => {
         </div>
       </div>
 
-      {/* CARRUSEL DE TESTIMONIOS */}
+      {/* TESTIMONIOS */}
       <div className="container mt-5">
         <h2 className="text-center fw-bold mb-4 texto-morado">EXPERIENCIAS</h2>
 
@@ -356,7 +388,7 @@ const Testimonios = () => {
         </div>
       </div>
 
-      {/* BOTÓN FLOTANTE CHAT */}
+      {/* CHAT */}
       <div
         className="chat-float"
         style={{ cursor: "pointer" }}
@@ -365,7 +397,7 @@ const Testimonios = () => {
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER */}
       <footer className="custom-footer pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">

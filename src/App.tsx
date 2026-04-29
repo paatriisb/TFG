@@ -13,6 +13,7 @@ import Perfil from "./pages/Perfil";
 import CentrosAcogida from "./pages/CentrosAcogida";
 import Psicologia from "./pages/Psicologia";
 import AyudaLegal from "./pages/AyudaLegal";
+import Emergencia from "./pages/Emergencia";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/centrosAcogida" element={<CentrosAcogida />} />{" "}
         <Route path="/psicologia" element={<Psicologia />} />
         <Route path="/ayudaLegal" element={<AyudaLegal />} />
+        <Route path="/emergencia" element={<Emergencia />} />
       </Routes>
     </BrowserRouter>
   );

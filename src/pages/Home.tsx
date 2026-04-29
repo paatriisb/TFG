@@ -44,6 +44,38 @@ function Home() {
     window.open("https://www.google.com", "_blank");
   };
 
+  // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
+  useEffect(() => {
+    let timeout: number;
+
+    const logout = () => {
+      localStorage.clear();
+      window.location.replace("https://www.google.com");
+    };
+
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        logout();
+      }, 60000); // LE PONEMOS 1 MINUTO
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+
+    events.forEach((event) => {
+      window.addEventListener(event, resetTimer);
+    });
+
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, resetTimer);
+      });
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <div className="fondo">
       <div className="container mt-2">
@@ -61,17 +93,17 @@ function Home() {
         </div>
       </div>
 
-      {/* Card */}
+      {/* CARD */}
       <div className="container mt-4 px-2 px-md-3">
         <div className="card shadow border-0 card-principal mx-auto">
-          {/* título */}
+          {/* TÍTULO DE CARD */}
           <div className="card-header text-white text-center colorHeaderCard">
             <h4 className="card-title mb-0">Navegación segura</h4>
           </div>
 
-          {/* Contenido */}
+          {/* CONTENIDO DE CARD */}
           <div className="card-body d-flex flex-column">
-            {/* Item 1 */}
+            {/* MINICARD 1 */}
             <div className="item-card row align-items-center mb-3 text-center">
               <div className="col-12 col-md-8">
                 <p className="titulo-item mb-0">
@@ -85,7 +117,7 @@ function Home() {
               </div>
             </div>
 
-            {/* Item 2 */}
+            {/* MINICARD 2 */}
             <div className="item-card row align-items-center mb-3 text-center">
               <div className="col-12 col-md-8">
                 <p className="titulo-item mb-1">· Opción de salir rápido</p>
@@ -102,7 +134,7 @@ function Home() {
               </div>
             </div>
 
-            {/* Item 3 */}
+            {/* MINICARD 3 */}
             <div className="item-card row align-items-center mb-3 text-center">
               <div className="col-12 col-md-8">
                 <p className="titulo-item mb-1"> · Modo incógnito</p>
@@ -127,7 +159,7 @@ function Home() {
               </div>
             </div>
 
-            {/* Botón abajo SIEMPRE */}
+            {/* BOTON ENTRAR */}
             <div className="mt-auto text-center pt-3">
               <button
                 onClick={() => navigate("/login")}
