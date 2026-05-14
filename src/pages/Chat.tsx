@@ -34,13 +34,13 @@ const ChatSeguro = () => {
   const respuestasDetalladas = {
     psicologa: {
       1: `Técnicas de calma: Para reducir la ansiedad y el estrés, puedes probar la respiración 4-7-8: inhala contando hasta 4, mantén la respiración 7 segundos, exhala lentamente 8 segundos. Combina esto con relajación muscular progresiva y meditación guiada. Practicar estas técnicas 10-15 minutos al día mejora tu bienestar emocional.`,
-      2: `Gestión del miedo: Sentir miedo es natural ante situaciones inciertas. Identifica lo que realmente te preocupa y cuestiona pensamientos irracionales. Combina con respiración y relajación, habla con alguien de confianza y mantén rutinas de autocuidado.<br><br><button class="btn btn-sm btn-light border" onclick="window.open('guiasYrecursosdeapoyo.html', '_blank')">Ver guías y recursos de apoyo</button>`,
-      3: `Redes de apoyo: No estás sola. Busca grupos de apoyo locales, asociaciones o comunidades en línea. Participar en actividades sociales y voluntariado ayuda a crear conexiones. También puedes acudir a psicólogos especializados.<br><br><button class="btn btn-sm btn-light border" onclick="window.open('testimonios.html', '_blank')">Ver testimonios</button>`,
+      2: `Gestión del miedo: Sentir miedo es natural ante situaciones inciertas. Identifica lo que realmente te preocupa y cuestiona pensamientos irracionales. Combina con respiración y relajación, habla con alguien de confianza y mantén rutinas de autocuidado.<br><br><button class="btn btn-sm btn-light border" onclick="window.open('guiasYrecursosdeapoyo', '_blank')">Ver guías y recursos de apoyo</button>`,
+      3: `Redes de apoyo: No estás sola. Busca grupos de apoyo locales, asociaciones o comunidades en línea. Participar en actividades sociales y voluntariado ayuda a crear conexiones. También puedes acudir a psicólogos especializados.<br><br><button class="btn btn-sm btn-light border" onclick="window.open('testimonios', '_blank')">Ver testimonios</button>`,
     },
     abogada: {
       1: `Tipos de trámites legales: Divorcio, custodia, pensiones alimenticias, adopciones, herencias, denuncias o ayudas sociales. Infórmate siempre en comisarías, juzgados o servicios legales gratuitos.`,
       2: `Tus derechos: Derecho a asistencia jurídica gratuita, información, representación legal y protección en situaciones de vulnerabilidad. Conoce tus derechos laborales y familiares.`,
-      3: `Orden de protección: Recurso legal para protegerte de violencia o acoso. Incluye medidas como prohibición de acercamiento, alejamiento del hogar y asistencia social.<br><br><button class="btn btn-sm btn-light border" onclick="window.open('ayudaLegal.html', '_blank')">Acceder a ayuda legal</button>`,
+      3: `Orden de protección: Recurso legal para protegerte de violencia o acoso. Incluye medidas como prohibición de acercamiento, alejamiento del hogar y asistencia social.<br><br><button class="btn btn-sm btn-light border" onclick="window.open('ayudaLegal', '_blank')">Acceder a ayuda legal</button>`,
     },
   };
 
@@ -260,15 +260,11 @@ const ChatSeguro = () => {
   return (
     <>
       {/* NAVEGADOR */}
-      <nav
-        className="navbar navbar-expand-sm navbar-dark"
-        style={{ backgroundColor: "#6f42c1" }}
-      >
+      <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid d-flex p-0">
           <div className="nav-item text-center flex-fill">
             <div
-              className="navbar-brand text-white"
-              style={{ cursor: "pointer" }}
+              className="navbar-brand text-white iconoDeLaMano"
               onClick={() => navigate("/introduccion")}
             >
               <img
@@ -294,8 +290,7 @@ const ChatSeguro = () => {
             <div className="d-flex w-100">
               <div className="nav-item text-center flex-fill">
                 <span
-                  className="nav-link text-white botonEmergencia"
-                  style={{ cursor: "pointer" }}
+                  className="nav-link text-white botonEmergencia iconoDeLaMano"
                   onClick={() => navigate("/emergencia")}
                 >
                   Emergencia
@@ -313,8 +308,7 @@ const ChatSeguro = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/ayudaLegal")}
                     >
                       Ayuda legal
@@ -322,8 +316,7 @@ const ChatSeguro = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/psicologia")}
                     >
                       Psicología
@@ -331,8 +324,7 @@ const ChatSeguro = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/centrosAcogida")}
                     >
                       Centros de acogida
@@ -353,8 +345,7 @@ const ChatSeguro = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/prevencion")}
                     >
                       Prevención y seguridad
@@ -362,8 +353,7 @@ const ChatSeguro = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/derechosLegislacion")}
                     >
                       Derechos y legislación
@@ -371,8 +361,7 @@ const ChatSeguro = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/guiasYrecursosdeapoyo")}
                     >
                       Guías y recursos de apoyo
@@ -380,8 +369,7 @@ const ChatSeguro = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/testimonios")}
                     >
                       Testimonios y experiencias
@@ -402,8 +390,7 @@ const ChatSeguro = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item iconoDeLaMano"
                       onClick={() => navigate("/perfil")}
                     >
                       Editar perfil
@@ -411,8 +398,7 @@ const ChatSeguro = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item text-danger"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item text-danger iconoDeLaMano"
                       onClick={() => navigate("/cerrarSesion")}
                     >
                       Cerrar sesión
@@ -469,7 +455,6 @@ const ChatSeguro = () => {
                 className="card-body chat-window d-flex flex-column"
                 id="chatBox"
                 ref={chatBoxRef}
-                style={{ height: "400px", overflowY: "auto" }}
               >
                 <div className="message received">
                   ¡Hola! Soy tu asistente de confianza. Selecciona una opción
@@ -490,13 +475,13 @@ const ChatSeguro = () => {
                     className="d-flex gap-2 mt-2 justify-content-center"
                   >
                     <button
-                      className="btn btn-morado-personalizado btn-sm"
+                      className="btn botonesMorados btn-sm"
                       onClick={() => iniciarChat("psicologa")}
                     >
                       Psicóloga
                     </button>
                     <button
-                      className="btn btn-morado-personalizado btn-sm"
+                      className="btn botonesMorados btn-sm"
                       onClick={() => iniciarChat("abogada")}
                     >
                       Abogada
@@ -506,7 +491,7 @@ const ChatSeguro = () => {
 
                 {inputDisabled && messages.length > 5 && (
                   <button
-                    className="btn btn-morado-personalizado mt-2 align-self-center"
+                    className="btn botonesMorados mt-2 align-self-center"
                     onClick={reiniciarChat}
                   >
                     Volver a hablar
@@ -529,7 +514,7 @@ const ChatSeguro = () => {
                     disabled={inputDisabled}
                   />
                   <button
-                    className="btn btn-morado-personalizado"
+                    className="btn botonesMorados"
                     type="submit"
                     disabled={inputDisabled}
                   >
@@ -543,11 +528,13 @@ const ChatSeguro = () => {
       </div>
 
       {/* FOOTER */}
-      <footer className="custom-footer pt-5 pb-4 mt-5">
+      <footer className="estilosDelFooter pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">Ayuda</h5>
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
+                Ayuda
+              </h5>
               <p className="small">
                 Plataforma de apoyo y recursos diseñada para ofrecer seguridad,
                 información y acompañamiento profesional en momentos críticos.
@@ -555,13 +542,12 @@ const ChatSeguro = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Servicios
               </h5>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter iconoDeLaMano"
                   onClick={() => navigate("/ayuda-legal")}
                 >
                   Ayuda Legal
@@ -569,8 +555,7 @@ const ChatSeguro = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter iconoDeLaMano"
                   onClick={() => navigate("/psicologia")}
                 >
                   Psicología
@@ -578,8 +563,7 @@ const ChatSeguro = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter iconoDeLaMano"
                   onClick={() => navigate("/centros-acogida")}
                 >
                   Centros
@@ -604,17 +588,17 @@ const ChatSeguro = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Síguenos
               </h5>
               <div className="d-flex justify-content-center justify-content-md-start">
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-twitter-x"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
@@ -627,7 +611,7 @@ const ChatSeguro = () => {
             <div className="col-md-7 col-lg-8">
               <p className="small">
                 © 2026 Todos los derechos reservados:{" "}
-                <strong className="text-info">016SEGURO</strong>
+                <strong className="titulosDelFooter">016SEGURO</strong>
               </p>
             </div>
             <div className="col-md-5 col-lg-4 text-center text-md-end">

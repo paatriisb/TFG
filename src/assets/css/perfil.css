@@ -19,6 +19,29 @@ body::before {
   pointer-events: none;
 }
 
+/* CURSOR POINTER */
+.ratonMano {
+  cursor: pointer;
+}
+
+/* CARD PERFIL */
+.cardDelPerfil {
+  max-width: 500px;
+  border-radius: 15px;
+}
+
+/* HEADER PERFIL */
+.headerDelPerfil {
+  background-color: #6f42c1;
+  border-radius: 15px 15px 0 0;
+}
+
+/* BOTONES PERFIL */
+.botonesDelPerfil {
+  background-color: #6f42c1 !important;
+  color: white !important;
+}
+
 /* NAVEGADOR */
 nav.navbar {
   background-color: #6f42c1;
@@ -113,7 +136,7 @@ nav.navbar:hover {
 }
 
 /* FOOTER */
-.custom-footer {
+.estilosDelFooter {
   background-color: #6f42c1;
   color: white;
   margin-top: auto;
@@ -121,78 +144,82 @@ nav.navbar:hover {
   padding-bottom: 2rem;
 }
 
-.custom-footer h5 {
+.estilosDelFooter h5 {
   color: #280c5b !important;
   font-weight: 800;
   text-transform: uppercase;
   font-size: 1.1rem;
 }
 
-.footer-link {
+.linksDelFooter {
   color: #b8a2dd;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
-.footer-link:hover {
+.linksDelFooter:hover {
   color: #ffffff;
-  transform: translateX(8px);
+  transform: translateY(-5px);
 }
 
-.custom-footer hr {
+.linksDelFooter i {
+  font-size: 1.3rem;
+}
+
+.estilosDelFooter hr {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.custom-footer p.small {
+.estilosDelFooter p.small {
   color: #b8a2dd !important;
   font-size: 0.85rem;
 }
 
-/* MODO DISCRETO */
-body.modo-discreto::before {
-  background: #272525 !important;
-  opacity: 1;
+.titulosDelFooter {
+  color: #490268;
 }
 
-body.modo-discreto {
-  background: #4e4d4d !important;
+/* MODO DISCRETO DE PERFIL */
+body.modo-discreto .cardDelPerfil {
+  background-color: #3a3a3a !important;
   color: #d0d0d0 !important;
+  border: 1px solid #555 !important;
+
+  filter: blur(5px);
+
+  transition:
+    filter 0.3s ease,
+    background-color 0.3s ease;
 }
 
-body.modo-discreto .navbar {
-  background-color: #333333 !important;
+body.modo-discreto .cardDelPerfil:hover {
+  filter: blur(0);
 }
 
-body.modo-discreto .nav-link,
-body.modo-discreto .dropdown-item {
-  color: #a8b0c0 !important;
+body.modo-discreto .headerDelPerfil {
+  background: #222 !important;
 }
 
 body.modo-discreto .form-control-lg {
-  background-color: #4a4a4a !important;
-  color: #e0e0e0 !important;
-  border: 1px solid grey !important;
+  background: #4a4a4a !important;
+  color: #d0d0d0 !important;
+  border: 1px solid #666 !important;
 }
-
-body.modo-discreto input.form-control::placeholder {
+body.modo-discreto label {
   color: grey !important;
 }
 
-body.modo-discreto .custom-footer {
-  background-color: #1a1a1a !important;
+body.modo-discreto .botonesDelPerfil {
+  background: #1d171f !important;
+  border: 1px solid #444 !important;
+  color: grey !important;
 }
 
-body.modo-discreto .footer-link {
-  color: #777 !important;
+body.modo-discreto button {
+  color: grey !important;
 }
 
-/* BOTÓN DE EMERGENCIA EN MODO DISCRETO */
-body.modo-discreto .botonEmergencia {
-  filter: blur(3px);
-  opacity: 0.4;
-}
-
-body.modo-discreto .botonEmergencia:hover {
-  filter: blur(0);
-  opacity: 1;
+body.modo-discreto .estilosDelFooter {
+  background-color: #242323 !important;
+  color: white !important;
 }

@@ -154,23 +154,12 @@ const GuiasYrecursosdeapoyo = () => {
 
   return (
     <>
-      <style>{`
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 15px; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .btn-recurso { background-color: #6f42c1; color: white; border-radius: 20px; text-decoration: none; display: inline-block; padding: 5px 15px; font-size: 0.9rem; transition: 0.3s; border: none; }
-        .btn-recurso:hover { background-color: #563d7c; color: white; }
-      `}</style>
-
       {/* NAVEGADOR */}
-      <nav
-        className="navbar navbar-expand-sm navbar-dark"
-        style={{ backgroundColor: "#6f42c1" }}
-      >
+      <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid d-flex p-0">
           <div className="nav-item text-center flex-fill">
             <div
-              className="navbar-brand text-white"
-              style={{ cursor: "pointer" }}
+              className="navbar-brand text-white ratonMano"
               onClick={() => navigate("/introduccion")}
             >
               <img
@@ -196,8 +185,7 @@ const GuiasYrecursosdeapoyo = () => {
             <div className="d-flex w-100">
               <div className="nav-item text-center flex-fill">
                 <span
-                  className="nav-link text-white botonEmergencia"
-                  style={{ cursor: "pointer" }}
+                  className="nav-link text-white botonEmergencia ratonMano"
                   onClick={() => navigate("/emergencia")}
                 >
                   Emergencia
@@ -215,8 +203,7 @@ const GuiasYrecursosdeapoyo = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/ayudaLegal")}
                     >
                       Ayuda legal
@@ -224,8 +211,7 @@ const GuiasYrecursosdeapoyo = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/psicologia")}
                     >
                       Psicología
@@ -233,8 +219,7 @@ const GuiasYrecursosdeapoyo = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/centrosAcogida")}
                     >
                       Centros de acogida
@@ -255,8 +240,7 @@ const GuiasYrecursosdeapoyo = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/prevencion")}
                     >
                       Prevención y seguridad
@@ -264,8 +248,7 @@ const GuiasYrecursosdeapoyo = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/derechosLegislacion")}
                     >
                       Derechos y legislación
@@ -273,8 +256,7 @@ const GuiasYrecursosdeapoyo = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/guiasYrecursosdeapoyo")}
                     >
                       Guías y recursos de apoyo
@@ -282,8 +264,7 @@ const GuiasYrecursosdeapoyo = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/testimonios")}
                     >
                       Testimonios y experiencias
@@ -304,8 +285,7 @@ const GuiasYrecursosdeapoyo = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/perfil")}
                     >
                       Editar perfil
@@ -313,8 +293,7 @@ const GuiasYrecursosdeapoyo = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item text-danger"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item text-danger ratonMano"
                       onClick={() => navigate("/cerrarSesion")}
                     >
                       Cerrar sesión
@@ -331,10 +310,10 @@ const GuiasYrecursosdeapoyo = () => {
       <div className="colorFondo">
         <div className="container-fluid mt-3 px-2 px-md-4">
           <div className="d-flex justify-content-between align-items-center flex-nowrap gap-2">
-            <div className="buscador-personalizado shadow-sm flex-grow-1">
+            <div className="buscador shadow-sm flex-grow-1">
               <div className="input-group h-100">
                 <span className="input-group-text bg-white border-end-0">
-                  <i className="bi bi-search" style={{ color: "#6f42c1" }}></i>
+                  <i className="bi bi-search"></i>
                 </span>
                 <input
                   type="text"
@@ -366,7 +345,7 @@ const GuiasYrecursosdeapoyo = () => {
 
       {/* CONTENIDO */}
       <div className="container mt-4 mb-5">
-        <h1 className="titulo-seccion">GUÍAS Y RECURSOS DE APOYO</h1>
+        <h1 className="titulos">GUÍAS Y RECURSOS DE APOYO</h1>
         <p className="text-muted">
           No estás sola. Aquí tienes herramientas prácticas para entender qué
           está pasando y cómo cuidarte.
@@ -375,11 +354,11 @@ const GuiasYrecursosdeapoyo = () => {
         <div className="row g-4 mt-2">
           {filtrados.map((item, idx) => (
             <div className="col-md-6 col-lg-4" key={idx}>
-              <div className="card-servicio shadow h-100">
-                <div className="card-servicio-header">{item.titulo}</div>
-                <div className="card-servicio-body">
+              <div className="cardDeInformacion shadow h-100">
+                <div className="headerDelCardDeInformacion">{item.titulo}</div>
+                <div className="bodyDelCardDeInformacion">
                   {item.tipo === "video" && (
-                    <div className="video-container">
+                    <div className="videoDeGuiasYrecursos">
                       <iframe
                         src={item.videoUrl}
                         title="Video"
@@ -402,7 +381,7 @@ const GuiasYrecursosdeapoyo = () => {
                         href={b.l}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn-recurso mb-2 d-block text-center"
+                        className="botonesGuiasYrecursos mb-2 d-block text-center"
                       >
                         {b.t}
                       </a>
@@ -414,8 +393,7 @@ const GuiasYrecursosdeapoyo = () => {
                           navigate(item.link);
                         }
                       }}
-                      className="btn-recurso w-100 shadow-sm"
-                      style={{ background: "#25d366" }}
+                      className="botonesGuiasYrecursos botonChatGuiasYrecursos w-100 shadow-sm"
                     >
                       <i className="bi bi-chat-fill me-2"></i>
                       {item.btnTexto}
@@ -426,7 +404,7 @@ const GuiasYrecursosdeapoyo = () => {
                         href={item.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn-recurso"
+                        className="botonesGuiasYrecursos"
                       >
                         {item.tipo === "descarga" && (
                           <i className="bi bi-file-earmark-pdf me-2"></i>
@@ -443,11 +421,13 @@ const GuiasYrecursosdeapoyo = () => {
       </div>
 
       {/* FOOTER */}
-      <footer className="custom-footer pt-5 pb-4 mt-5">
+      <footer className="estilosDelFooter pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">Ayuda</h5>
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
+                Ayuda
+              </h5>
               <p className="small">
                 Plataforma de apoyo y recursos diseñada para ofrecer seguridad,
                 información y acompañamiento profesional en momentos críticos.
@@ -455,13 +435,12 @@ const GuiasYrecursosdeapoyo = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Servicios
               </h5>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/ayuda-legal")}
                 >
                   Ayuda Legal
@@ -469,8 +448,7 @@ const GuiasYrecursosdeapoyo = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/psicologia")}
                 >
                   Psicología
@@ -478,8 +456,7 @@ const GuiasYrecursosdeapoyo = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/centros-acogida")}
                 >
                   Centros
@@ -504,17 +481,17 @@ const GuiasYrecursosdeapoyo = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Síguenos
               </h5>
               <div className="d-flex justify-content-center justify-content-md-start">
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-twitter-x"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
@@ -527,7 +504,7 @@ const GuiasYrecursosdeapoyo = () => {
             <div className="col-md-7 col-lg-8">
               <p className="small">
                 © 2026 Todos los derechos reservados:{" "}
-                <strong className="text-info">016SEGURO</strong>
+                <strong className="titulosDelFooter">016SEGURO</strong>
               </p>
             </div>
             <div className="col-md-5 col-lg-4 text-center text-md-end">

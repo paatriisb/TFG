@@ -324,11 +324,13 @@ const AyudaLegal = () => {
       </div>
 
       {/* FOOTER */}
-      <footer className="custom-footer pt-5 pb-4 mt-5">
+      <footer className="estilosDelFooter pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">Ayuda</h5>
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
+                Ayuda
+              </h5>
               <p className="small">
                 Plataforma de apoyo y recursos diseñada para ofrecer seguridad,
                 información y acompañamiento profesional en momentos críticos.
@@ -336,7 +338,7 @@ const AyudaLegal = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Servicios
               </h5>
               <p>
@@ -385,7 +387,7 @@ const AyudaLegal = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Síguenos
               </h5>
               <div className="d-flex justify-content-center justify-content-md-start">
@@ -408,7 +410,7 @@ const AyudaLegal = () => {
             <div className="col-md-7 col-lg-8">
               <p className="small">
                 © 2026 Todos los derechos reservados:{" "}
-                <strong className="text-info">016SEGURO</strong>
+                <strong className="titulosDelFooter">016SEGURO</strong>
               </p>
             </div>
             <div className="col-md-5 col-lg-4 text-center text-md-end">

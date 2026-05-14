@@ -100,15 +100,11 @@ const Perfil = () => {
   return (
     <>
       {/* Navegador */}
-      <nav
-        className="navbar navbar-expand-sm navbar-dark"
-        style={{ backgroundColor: "#6f42c1" }}
-      >
+      <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid d-flex p-0">
           <div className="nav-item text-center flex-fill">
             <div
-              className="navbar-brand text-white"
-              style={{ cursor: "pointer" }}
+              className="navbar-brand text-white ratonMano"
               onClick={() => navigate("/introduccion")}
             >
               <img
@@ -134,8 +130,7 @@ const Perfil = () => {
             <div className="d-flex w-100">
               <div className="nav-item text-center flex-fill">
                 <span
-                  className="nav-link text-white botonEmergencia"
-                  style={{ cursor: "pointer" }}
+                  className="nav-link text-white botonEmergencia ratonMano"
                   onClick={() => navigate("/emergencia")}
                 >
                   Emergencia
@@ -154,8 +149,7 @@ const Perfil = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/ayudaLegal")}
                     >
                       Ayuda legal
@@ -163,8 +157,7 @@ const Perfil = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/psicologia")}
                     >
                       Psicología
@@ -172,8 +165,7 @@ const Perfil = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/centrosAcogida")}
                     >
                       Centros de acogida
@@ -195,8 +187,7 @@ const Perfil = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/prevencion")}
                     >
                       Prevención y seguridad
@@ -204,8 +195,7 @@ const Perfil = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/derechosLegislacion")}
                     >
                       Derechos y legislación
@@ -213,8 +203,7 @@ const Perfil = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/guiasYrecursosdeapoyo")}
                     >
                       Guías y recursos de apoyo
@@ -222,8 +211,7 @@ const Perfil = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/testimonios")}
                     >
                       Testimonios y experiencias
@@ -245,8 +233,7 @@ const Perfil = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/perfil")}
                     >
                       Editar perfil
@@ -254,8 +241,7 @@ const Perfil = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item text-danger"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item text-danger ratonMano"
                       onClick={() => navigate("/cerrarSesion")}
                     >
                       Cerrar sesión
@@ -288,17 +274,8 @@ const Perfil = () => {
 
       {/* Formulario de Perfil */}
       <div className="container mt-4">
-        <div
-          className="card shadow mx-auto"
-          style={{ maxWidth: "500px", borderRadius: "15px" }}
-        >
-          <div
-            className="p-4 text-white d-flex justify-content-between align-items-center"
-            style={{
-              backgroundColor: "#6f42c1",
-              borderRadius: "15px 15px 0 0",
-            }}
-          >
+        <div className="card shadow mx-auto cardDelPerfil">
+          <div className="p-4 text-white d-flex justify-content-between align-items-center headerDelPerfil">
             <div>
               <h2 className="mb-0 fw-bold">MI PERFIL</h2>
               <p className="mb-0 opacity-75">
@@ -363,8 +340,7 @@ const Perfil = () => {
                 {!isEditing ? (
                   <button
                     type="button"
-                    className="btn btn-lg text-white"
-                    style={{ backgroundColor: "#6f42c1" }}
+                    className="btn btn-lg text-white botonesDelPerfil"
                     onClick={() => setIsEditing(true)}
                   >
                     EDITAR DATOS
@@ -373,8 +349,7 @@ const Perfil = () => {
                   <>
                     <button
                       type="submit"
-                      className="btn btn-lg"
-                      style={{ backgroundColor: "#6f42c1", color: "white" }}
+                      className="btn btn-lg botonesDelPerfil"
                     >
                       CONFIRMAR CAMBIOS
                     </button>
@@ -401,11 +376,13 @@ const Perfil = () => {
       </div>
 
       {/* FOOTER COMPLETO */}
-      <footer className="custom-footer pt-5 pb-4 mt-5">
+      <footer className="estilosDelFooter pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">Ayuda</h5>
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
+                Ayuda
+              </h5>
               <p className="small">
                 Plataforma de apoyo y recursos diseñada para ofrecer seguridad,
                 información y acompañamiento profesional en momentos críticos.
@@ -413,13 +390,12 @@ const Perfil = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Servicios
               </h5>
               <p>
                 <span
-                  className="footer-link text-decoration-none"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter text-decoration-none ratonMano"
                   onClick={() => navigate("/ayudaLegal")}
                 >
                   Ayuda Legal
@@ -427,8 +403,7 @@ const Perfil = () => {
               </p>
               <p>
                 <span
-                  className="footer-link text-decoration-none"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter text-decoration-none ratonMano"
                   onClick={() => navigate("/psicologia")}
                 >
                   Psicología
@@ -436,8 +411,7 @@ const Perfil = () => {
               </p>
               <p>
                 <span
-                  className="footer-link text-decoration-none"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter text-decoration-none ratonMano"
                   onClick={() => navigate("/centrosAcogida")}
                 >
                   Centros
@@ -462,17 +436,17 @@ const Perfil = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Síguenos
               </h5>
               <div className="d-flex justify-content-center justify-content-md-start">
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-twitter-x"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
@@ -485,7 +459,7 @@ const Perfil = () => {
             <div className="col-md-7 col-lg-8">
               <p className="small">
                 © 2026 Todos los derechos reservados:{" "}
-                <strong className="text-info">016SEGURO</strong>
+                <strong className="titulosDelFooter">016SEGURO</strong>
               </p>
             </div>
             <div className="col-md-5 col-lg-4 text-center text-md-end">

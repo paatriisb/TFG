@@ -410,3 +410,89 @@ body.modo-discreto .botonEmergencia:hover {
   opacity: 1;
   transform: scale(1.05);
 }
+.boton-panico {
+  padding: 25px 50px;
+  font-size: 35px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: white;
+  background: #ff0000;
+  border: 6px solid white;
+  border-radius: 12px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.contenedor-mapa-mujer {
+  height: 300px;
+  border-radius: 15px;
+  border: 2px solid #6f42c1;
+  background-color: white;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.card-emergencia-grande {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.pregunta-emergencia {
+  color: #3b1f70;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.btn-si-morado {
+  background-color: #6f42c1 !important;
+  border: none !important;
+  border-radius: 12px !important;
+}
+
+.btn-no-gris {
+  border-radius: 12px !important;
+}
+
+.mapa-patrulla {
+  height: 280px;
+  border-radius: 15px;
+  border: 1px dashed #ccc;
+}
+
+.lista-emergencia {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.lista-emergencia li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  list-style: none !important;
+}
+
+.punto-rojo {
+  font-size: 0.5rem;
+  color: #dc3545;
+  margin-right: 8px;
+}
+
+.mapa-patrulla-style {
+  height: 280px;
+  border-radius: 15px;
+  border: 1px dashed #ccc;
+}
+.car {
+  font-size: 24px;
+  transform-origin: center;
+  transition: transform 0.2s linear;
+}
+
+.titulosDelFooter {
+  color: #490268;
+}

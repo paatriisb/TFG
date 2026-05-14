@@ -61,14 +61,8 @@ const CerrarSesion = () => {
   }, []);
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
-    >
-      <div
-        className="cardCerrarSesion alert text-center shadow p-4"
-        style={{ maxWidth: "400px", width: "90%" }}
-      >
+    <div className="d-flex justify-content-center align-items-center contenedorParaCerrarLaSesion">
+      <div className="cardDeCerrarSesion alert text-center shadow p-4">
         <i className="bi bi-check-circle-fill text-success fs-1 mb-3 d-block"></i>
         <h4 className="fw-bold">Has cerrado la sesión correctamente</h4>
         <p className="text-muted small">
@@ -78,7 +72,6 @@ const CerrarSesion = () => {
         <div className="d-grid gap-2 mt-4">
           <button
             className="botonCerrarSesion btn text-white"
-            style={{ backgroundColor: "#6f42c1" }}
             onClick={() => navigate("/", { replace: true })}
           >
             Volver al inicio

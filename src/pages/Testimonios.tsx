@@ -74,15 +74,11 @@ const Testimonios = () => {
   return (
     <>
       {/* NAVEGADOR */}
-      <nav
-        className="navbar navbar-expand-sm navbar-dark"
-        style={{ backgroundColor: "#6f42c1" }}
-      >
+      <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid d-flex p-0">
           <div className="nav-item text-center flex-fill">
             <div
-              className="navbar-brand text-white"
-              style={{ cursor: "pointer" }}
+              className="navbar-brand text-white ratonMano"
               onClick={() => navigate("/introduccion")}
             >
               <img
@@ -108,8 +104,7 @@ const Testimonios = () => {
             <div className="d-flex w-100">
               <div className="nav-item text-center flex-fill">
                 <span
-                  className="nav-link text-white botonEmergencia"
-                  style={{ cursor: "pointer" }}
+                  className="nav-link text-white botonEmergencia ratonMano"
                   onClick={() => navigate("/emergencia")}
                 >
                   Emergencia
@@ -127,8 +122,7 @@ const Testimonios = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/ayudaLegal")}
                     >
                       Ayuda legal
@@ -136,8 +130,7 @@ const Testimonios = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/psicologia")}
                     >
                       Psicología
@@ -145,8 +138,7 @@ const Testimonios = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/centrosAcogida")}
                     >
                       Centros de acogida
@@ -167,8 +159,7 @@ const Testimonios = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/prevencion")}
                     >
                       Prevención y seguridad
@@ -176,8 +167,7 @@ const Testimonios = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/derechosLegislacion")}
                     >
                       Derechos y legislación
@@ -185,8 +175,7 @@ const Testimonios = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/guiasYrecursosdeapoyo")}
                     >
                       Guías y recursos de apoyo
@@ -194,8 +183,7 @@ const Testimonios = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/testimonios")}
                     >
                       Testimonios y experiencias
@@ -216,8 +204,7 @@ const Testimonios = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/perfil")}
                     >
                       Editar perfil
@@ -225,8 +212,7 @@ const Testimonios = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item text-danger"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item text-danger ratonMano"
                       onClick={() => navigate("/cerrarSesion")}
                     >
                       Cerrar sesión
@@ -259,20 +245,19 @@ const Testimonios = () => {
 
       {/* TESTIMONIOS */}
       <div className="container mt-5">
-        <h2 className="text-center fw-bold mb-4 texto-morado">EXPERIENCIAS</h2>
+        <h2 className="text-center fw-bold mb-4 textoSoloMorado">
+          EXPERIENCIAS
+        </h2>
 
         <div
           id="testimonioCarousel"
-          className="carousel slide shadow rounded bg-white carousel-testimonios"
+          className="carousel slide shadow rounded bg-white carouselDeTestimonios"
           data-bs-ride="carousel"
         >
-          <div className="carousel-inner">
+          <div className="carousel-inner testimonioCarousel">
             <div className="carousel-item active">
-              <div
-                className="d-flex flex-column align-items-center justify-content-center text-center p-5"
-                style={{ minHeight: "300px" }}
-              >
-                <div className="rounded-circle d-flex align-items-center justify-content-center mb-3 icono-perfil-circulo">
+              <div className="d-flex flex-column align-items-center justify-content-center text-center p-5 tamanoTestimoniosInformacion">
+                <div className="rounded-circle d-flex align-items-center justify-content-center mb-3 iconoDeLosPerfiles">
                   <i className="bi bi-person-heart fs-1"></i>
                 </div>
                 <p className="lead fst-italic px-md-5">
@@ -284,11 +269,8 @@ const Testimonios = () => {
               </div>
             </div>
             <div className="carousel-item">
-              <div
-                className="d-flex flex-column align-items-center justify-content-center text-center p-5"
-                style={{ minHeight: "300px" }}
-              >
-                <div className="rounded-circle d-flex align-items-center justify-content-center mb-3 icono-perfil-circulo">
+              <div className="d-flex flex-column align-items-center justify-content-center text-center p-5 tamanoTestimoniosInformacion">
+                <div className="rounded-circle d-flex align-items-center justify-content-center mb-3 iconoDeLosPerfiles">
                   <i className="bi bi-person-check fs-1"></i>
                 </div>
                 <p className="lead fst-italic px-md-5">
@@ -308,7 +290,7 @@ const Testimonios = () => {
             data-bs-slide="prev"
           >
             <span
-              className="carousel-control-prev-icon flecha-personalizada"
+              className="carousel-control-prev-icon flechaCarrouselInformacion"
               aria-hidden="true"
             ></span>
           </button>
@@ -319,7 +301,7 @@ const Testimonios = () => {
             data-bs-slide="next"
           >
             <span
-              className="carousel-control-next-icon flecha-personalizada"
+              className="carousel-control-next-icon flechaCarrouselInformacion"
               aria-hidden="true"
             ></span>
           </button>
@@ -328,7 +310,7 @@ const Testimonios = () => {
 
       {/* REDES DE APOYO */}
       <div className="container mt-5 mb-5">
-        <h2 className="text-center fw-bold mb-2 texto-morado">
+        <h2 className="text-center fw-bold mb-2 textoSoloMorado">
           TESTIMONIOS Y REDES DE APOYO
         </h2>
         <p className="text-center text-secondary mb-4">
@@ -338,10 +320,10 @@ const Testimonios = () => {
 
         <div className="row g-4">
           <div className="col-md-6">
-            <div className="card h-100 shadow-sm border-0 border-start border-4 borde-morado">
+            <div className="card h-100 shadow-sm border-0 border-start border-4 bordeMoradoDeLosBotones">
               <div className="card-body d-flex flex-column">
                 <div className="d-flex align-items-center mb-3">
-                  <i className="bi bi-megaphone-fill texto-morado fs-3 me-2"></i>
+                  <i className="bi bi-megaphone-fill textoSoloMorado fs-3 me-2"></i>
                   <h5 className="card-title fw-bold m-0">
                     Cristina Fallarás (#SeAcabó)
                   </h5>
@@ -355,7 +337,7 @@ const Testimonios = () => {
                   href="https://www.instagram.com/cfallaras/"
                   target="_blank"
                   rel="noreferrer"
-                  className="btn btn-morado-personalizado mt-auto"
+                  className="btn botonesMorados mt-auto"
                 >
                   <i className="bi bi-instagram me-2"></i>Ver testimonios
                 </a>
@@ -364,10 +346,10 @@ const Testimonios = () => {
           </div>
 
           <div className="col-md-6">
-            <div className="card h-100 shadow-sm border-0 border-start border-4 borde-morado">
+            <div className="card h-100 shadow-sm border-0 border-start border-4 bordeMoradoDeLosBotones">
               <div className="card-body d-flex flex-column">
                 <div className="d-flex align-items-center mb-3">
-                  <i className="bi bi-people-fill texto-morado fs-3 me-2"></i>
+                  <i className="bi bi-people-fill textoSoloMorado fs-3 me-2"></i>
                   <h5 className="card-title fw-bold m-0">Red de Sororidad</h5>
                 </div>
                 <p className="card-text text-muted">
@@ -378,7 +360,7 @@ const Testimonios = () => {
                   href="https://www.instagram.com/p/DUJ0mF2D2Nj/"
                   target="_blank"
                   rel="noreferrer"
-                  className="btn btn-morado-personalizado mt-auto"
+                  className="btn botonesMorados mt-auto"
                 >
                   <i className="bi bi-instagram me-2"></i>Ver en Instagram
                 </a>
@@ -389,20 +371,18 @@ const Testimonios = () => {
       </div>
 
       {/* CHAT */}
-      <div
-        className="chat-float"
-        style={{ cursor: "pointer" }}
-        onClick={() => navigate("/chat")}
-      >
+      <div className="iconoDelChat ratonMano" onClick={() => navigate("/chat")}>
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
       {/* FOOTER */}
-      <footer className="custom-footer pt-5 pb-4 mt-5">
+      <footer className="estilosDelFooter pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">Ayuda</h5>
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
+                Ayuda
+              </h5>
               <p className="small">
                 Plataforma de apoyo y recursos diseñada para ofrecer seguridad,
                 información y acompañamiento profesional en momentos críticos.
@@ -410,13 +390,12 @@ const Testimonios = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Servicios
               </h5>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/ayuda-legal")}
                 >
                   Ayuda Legal
@@ -424,8 +403,7 @@ const Testimonios = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/psicologia")}
                 >
                   Psicología
@@ -433,8 +411,7 @@ const Testimonios = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/centros-acogida")}
                 >
                   Centros
@@ -459,17 +436,17 @@ const Testimonios = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Síguenos
               </h5>
               <div className="d-flex justify-content-center justify-content-md-start">
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-twitter-x"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
@@ -482,7 +459,7 @@ const Testimonios = () => {
             <div className="col-md-7 col-lg-8">
               <p className="small">
                 © 2026 Todos los derechos reservados:{" "}
-                <strong className="text-info">016SEGURO</strong>
+                <strong className="titulosDelFooter">016SEGURO</strong>
               </p>
             </div>
             <div className="col-md-5 col-lg-4 text-center text-md-end">

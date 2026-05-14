@@ -95,7 +95,7 @@ function Home() {
 
       {/* CARD */}
       <div className="container mt-4 px-2 px-md-3">
-        <div className="card shadow border-0 card-principal mx-auto">
+        <div className="card shadow border-0 cardPrincipal mx-auto">
           {/* TÍTULO DE CARD */}
           <div className="card-header text-white text-center colorHeaderCard">
             <h4 className="card-title mb-0">Navegación segura</h4>
@@ -104,9 +104,9 @@ function Home() {
           {/* CONTENIDO DE CARD */}
           <div className="card-body d-flex flex-column">
             {/* MINICARD 1 */}
-            <div className="item-card row align-items-center mb-3 text-center">
+            <div className="itemDeLaCard row align-items-center mb-3 text-center">
               <div className="col-12 col-md-8">
-                <p className="titulo-item mb-0">
+                <p className="tituloDelItem mb-0">
                   · Borra tu historial de navegación
                 </p>
               </div>
@@ -118,9 +118,9 @@ function Home() {
             </div>
 
             {/* MINICARD 2 */}
-            <div className="item-card row align-items-center mb-3 text-center">
+            <div className="itemDeLaCard row align-items-center mb-3 text-center">
               <div className="col-12 col-md-8">
-                <p className="titulo-item mb-1">· Opción de salir rápido</p>
+                <p className="tituloDelItem mb-1">· Opción de salir rápido</p>
                 <p className="subtexto mb-2">
                   Usa <strong>ESC</strong> o el botón:
                 </p>
@@ -135,9 +135,9 @@ function Home() {
             </div>
 
             {/* MINICARD 3 */}
-            <div className="item-card row align-items-center mb-3 text-center">
+            <div className="itemDeLaCard row align-items-center mb-3 text-center">
               <div className="col-12 col-md-8">
-                <p className="titulo-item mb-1"> · Modo incógnito</p>
+                <p className="tituloDelItem mb-1"> · Modo incógnito</p>
                 <p className="subtexto mb-2">
                   Usa <strong>Ctrl + D</strong> o el botón:
                 </p>
@@ -163,7 +163,7 @@ function Home() {
             <div className="mt-auto text-center pt-3">
               <button
                 onClick={() => navigate("/login")}
-                className="btn btn-entrar px-5 py-2 text-white"
+                className="btn botonParaEntrar px-5 py-2 text-white fw-bold"
               >
                 Entrar
               </button>

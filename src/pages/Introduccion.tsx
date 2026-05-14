@@ -73,15 +73,11 @@ const Introduccion = () => {
   return (
     <>
       {/* NAVEGADOR */}
-      <nav
-        className="navbar navbar-expand-sm navbar-dark"
-        style={{ backgroundColor: "#6f42c1" }}
-      >
+      <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid d-flex p-0">
           <div className="nav-item text-center flex-fill">
             <div
-              className="navbar-brand text-white"
-              style={{ cursor: "pointer" }}
+              className="navbar-brand text-white ratonMano"
               onClick={() => navigate("/introduccion")}
             >
               <img
@@ -107,8 +103,7 @@ const Introduccion = () => {
             <div className="d-flex w-100">
               <div className="nav-item text-center flex-fill">
                 <span
-                  className="nav-link text-white botonEmergencia"
-                  style={{ cursor: "pointer" }}
+                  className="nav-link text-white botonEmergencia ratonMano"
                   onClick={() => navigate("/emergencia")}
                 >
                   Emergencia
@@ -126,8 +121,7 @@ const Introduccion = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/ayudaLegal")}
                     >
                       Ayuda legal
@@ -135,8 +129,7 @@ const Introduccion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/psicologia")}
                     >
                       Psicología
@@ -144,8 +137,7 @@ const Introduccion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/centrosAcogida")}
                     >
                       Centros de acogida
@@ -166,8 +158,7 @@ const Introduccion = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/prevencion")}
                     >
                       Prevención y seguridad
@@ -175,8 +166,7 @@ const Introduccion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/derechosLegislacion")}
                     >
                       Derechos y legislación
@@ -184,8 +174,7 @@ const Introduccion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/guiasYrecursosdeapoyo")}
                     >
                       Guías y recursos de apoyo
@@ -193,8 +182,7 @@ const Introduccion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/testimonios")}
                     >
                       Testimonios y experiencias
@@ -215,8 +203,7 @@ const Introduccion = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/perfil")}
                     >
                       Editar perfil
@@ -224,8 +211,7 @@ const Introduccion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item text-danger"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item text-danger ratonMano"
                       onClick={() => navigate("/cerrarSesion")}
                     >
                       Cerrar sesión
@@ -257,11 +243,9 @@ const Introduccion = () => {
       </div>
 
       <div className="container mt-5 mb-5">
-        <h1 className="titulo-seccion text-center mb-4" id="bienvenida"></h1>
-
         {/* ESTADÍSTICAS */}
         <div className="row g-4 mt-4">
-          <h2 className="text-center fw-bold mb-4 texto-morado">
+          <h2 className="text-center fw-bold mb-4 textoSoloMorado">
             ESTADÍSTICAS RECIENTES
           </h2>
           <div className="col-md-4">
@@ -304,7 +288,7 @@ const Introduccion = () => {
 
         {/* CONSEJOS */}
         <div className="row mt-5 g-4">
-          <h2 className="text-center fw-bold mb-4 texto-morado">
+          <h2 className="text-center fw-bold mb-4 textoSoloMorado">
             CONSEJOS DE SEGURIDAD
           </h2>
           <div className="col-md-4">
@@ -338,20 +322,18 @@ const Introduccion = () => {
       </div>
 
       {/* CHAT */}
-      <div
-        className="chat-float"
-        style={{ cursor: "pointer" }}
-        onClick={() => navigate("/chat")}
-      >
+      <div className="iconoDelChat ratonMano" onClick={() => navigate("/chat")}>
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
       {/* FOOTER */}
-      <footer className="custom-footer pt-5 pb-4 mt-5">
+      <footer className="estilosDelFooter pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">Ayuda</h5>
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
+                Ayuda
+              </h5>
               <p className="small">
                 Plataforma de apoyo y recursos diseñada para ofrecer seguridad,
                 información y acompañamiento profesional en momentos críticos.
@@ -359,13 +341,12 @@ const Introduccion = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Servicios
               </h5>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/ayuda-legal")}
                 >
                   Ayuda Legal
@@ -373,8 +354,7 @@ const Introduccion = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/psicologia")}
                 >
                   Psicología
@@ -382,8 +362,7 @@ const Introduccion = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/centros-acogida")}
                 >
                   Centros
@@ -408,17 +387,17 @@ const Introduccion = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Síguenos
               </h5>
               <div className="d-flex justify-content-center justify-content-md-start">
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-twitter-x"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
@@ -431,7 +410,7 @@ const Introduccion = () => {
             <div className="col-md-7 col-lg-8">
               <p className="small">
                 © 2026 Todos los derechos reservados:{" "}
-                <strong className="text-info">016SEGURO</strong>
+                <strong className="titulosDelFooter">016SEGURO</strong>
               </p>
             </div>
             <div className="col-md-5 col-lg-4 text-center text-md-end">

@@ -231,15 +231,11 @@ const DerechosLegislacion = () => {
   return (
     <>
       {/* NAVEGADOR */}
-      <nav
-        className="navbar navbar-expand-sm navbar-dark"
-        style={{ backgroundColor: "#6f42c1" }}
-      >
+      <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid d-flex p-0">
           <div className="nav-item text-center flex-fill">
             <div
-              className="navbar-brand text-white"
-              style={{ cursor: "pointer" }}
+              className="navbar-brand text-white ratonMano"
               onClick={() => navigate("/introduccion")}
             >
               <img
@@ -265,8 +261,7 @@ const DerechosLegislacion = () => {
             <div className="d-flex w-100">
               <div className="nav-item text-center flex-fill">
                 <span
-                  className="nav-link text-white botonEmergencia"
-                  style={{ cursor: "pointer" }}
+                  className="nav-link text-white botonEmergencia ratonMano"
                   onClick={() => navigate("/emergencia")}
                 >
                   Emergencia
@@ -284,8 +279,7 @@ const DerechosLegislacion = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/ayudaLegal")}
                     >
                       Ayuda legal
@@ -293,8 +287,7 @@ const DerechosLegislacion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/psicologia")}
                     >
                       Psicología
@@ -302,8 +295,7 @@ const DerechosLegislacion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/centrosAcogida")}
                     >
                       Centros de acogida
@@ -324,8 +316,7 @@ const DerechosLegislacion = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/prevencion")}
                     >
                       Prevención y seguridad
@@ -333,8 +324,7 @@ const DerechosLegislacion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/derechosLegislacion")}
                     >
                       Derechos y legislación
@@ -342,8 +332,7 @@ const DerechosLegislacion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/guiasYrecursosdeapoyo")}
                     >
                       Guías y recursos de apoyo
@@ -351,8 +340,7 @@ const DerechosLegislacion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/testimonios")}
                     >
                       Testimonios y experiencias
@@ -373,8 +361,7 @@ const DerechosLegislacion = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span
-                      className="dropdown-item"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item ratonMano"
                       onClick={() => navigate("/perfil")}
                     >
                       Editar perfil
@@ -382,8 +369,7 @@ const DerechosLegislacion = () => {
                   </li>
                   <li>
                     <span
-                      className="dropdown-item text-danger"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item text-danger ratonMano"
                       onClick={() => navigate("/cerrarSesion")}
                     >
                       Cerrar sesión
@@ -400,10 +386,10 @@ const DerechosLegislacion = () => {
       <div className="colorFondo">
         <div className="container-fluid mt-3 px-2 px-md-4">
           <div className="d-flex justify-content-between align-items-center flex-nowrap gap-2">
-            <div className="buscador-personalizado shadow-sm flex-grow-1">
+            <div className="buscador shadow-sm flex-grow-1">
               <div className="input-group h-100">
                 <span className="input-group-text bg-white border-end-0">
-                  <i className="bi bi-search" style={{ color: "#6f42c1" }}></i>
+                  <i className="bi bi-search"></i>
                 </span>
                 <input
                   type="text"
@@ -436,14 +422,16 @@ const DerechosLegislacion = () => {
 
       {/* CONTENIDO PRINCIPAL */}
       <div className="container mt-4 mb-5">
-        <h1 className="titulo-seccion">INFORMACIÓN - DERECHOS Y LEGISLACIÓN</h1>
+        <h1 className="titulos">INFORMACIÓN - DERECHOS Y LEGISLACIÓN</h1>
         <div className="row g-4 mt-2">
           {tarjetasFiltradas.length > 0 ? (
             tarjetasFiltradas.map((tarjeta, index) => (
               <div className="col-md-6 col-lg-4" key={index}>
-                <div className="card-servicio shadow h-100">
-                  <div className="card-servicio-header">{tarjeta.titulo}</div>
-                  <div className="card-servicio-body">
+                <div className="cardDeInformacion shadow h-100">
+                  <div className="headerDelCardDeInformacion">
+                    {tarjeta.titulo}
+                  </div>
+                  <div className="bodyDelCardDeInformacion">
                     <ul>
                       {tarjeta.puntos.map((punto, idx) => (
                         <li key={idx}>
@@ -466,20 +454,18 @@ const DerechosLegislacion = () => {
       </div>
 
       {/* CHAT */}
-      <div
-        className="chat-float"
-        style={{ cursor: "pointer" }}
-        onClick={() => navigate("/chat")}
-      >
+      <div className="iconoDelChat ratonMano" onClick={() => navigate("/chat")}>
         <i className="bi bi-chat-dots-fill"></i>
       </div>
 
       {/* FOOTER */}
-      <footer className="custom-footer pt-5 pb-4 mt-5">
+      <footer className="estilosDelFooter pt-5 pb-4 mt-5">
         <div className="container text-center text-md-start">
           <div className="row text-center text-md-start">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">Ayuda</h5>
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
+                Ayuda
+              </h5>
               <p className="small">
                 Plataforma de apoyo y recursos diseñada para ofrecer seguridad,
                 información y acompañamiento profesional en momentos críticos.
@@ -487,13 +473,12 @@ const DerechosLegislacion = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Servicios
               </h5>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/ayuda-legal")}
                 >
                   Ayuda Legal
@@ -501,8 +486,7 @@ const DerechosLegislacion = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/psicologia")}
                 >
                   Psicología
@@ -510,8 +494,7 @@ const DerechosLegislacion = () => {
               </p>
               <p>
                 <span
-                  className="footer-link"
-                  style={{ cursor: "pointer" }}
+                  className="linksDelFooter ratonMano"
                   onClick={() => navigate("/centros-acogida")}
                 >
                   Centros
@@ -536,17 +519,17 @@ const DerechosLegislacion = () => {
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h5 className="text-uppercase mb-4 fw-bold text-info">
+              <h5 className="text-uppercase mb-4 fw-bold titulosDelFooter">
                 Síguenos
               </h5>
               <div className="d-flex justify-content-center justify-content-md-start">
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-twitter-x"></i>
                 </a>
-                <a href="#" className="footer-link mx-2">
+                <a href="#" className="linksDelFooter mx-2">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
@@ -559,7 +542,7 @@ const DerechosLegislacion = () => {
             <div className="col-md-7 col-lg-8">
               <p className="small">
                 © 2026 Todos los derechos reservados:{" "}
-                <strong className="text-info">016SEGURO</strong>
+                <strong className="titulosDelFooter">016SEGURO</strong>
               </p>
             </div>
             <div className="col-md-5 col-lg-4 text-center text-md-end">

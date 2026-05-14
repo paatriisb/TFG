@@ -36,11 +36,6 @@ nav.navbar:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
-.navbar-brand img {
-  width: 40px;
-  height: 40px;
-}
-
 .nav-item {
   text-align: center;
   flex: 1;
@@ -85,6 +80,10 @@ nav.navbar:hover {
   cursor: pointer;
 }
 
+.ratonMano {
+  cursor: pointer;
+}
+
 /* TODOS LOS BOTONES */
 .btn {
   font-weight: 600;
@@ -103,6 +102,7 @@ nav.navbar:hover {
   color: white !important;
   padding: 0.75rem 1.5rem;
   font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .btn-danger.btn-panico {
@@ -111,7 +111,7 @@ nav.navbar:hover {
   padding: 0.75rem 1.5rem;
 }
 
-.btn-recurso {
+.botonesGuiasYrecursos {
   background-color: #6f42c1;
   color: white;
   border-radius: 20px;
@@ -122,13 +122,13 @@ nav.navbar:hover {
   border: none;
 }
 
-.btn-recurso:hover {
+.botonesGuiasYrecursos:hover {
   background-color: #563d7c;
   color: white;
 }
 
 /* BUSCADOR */
-.buscador-personalizado {
+.buscador {
   height: 60px;
   max-width: 400px;
   background: white;
@@ -139,18 +139,18 @@ nav.navbar:hover {
   transition: 0.3s;
 }
 
-.buscador-personalizado:focus-within {
+.buscador:focus-within {
   border-color: #5a32a3;
   box-shadow: 0 4px 12px rgba(111, 66, 193, 0.2);
 }
 
-.buscador-personalizado .form-control {
+.buscador .form-control {
   border: none;
   height: 100%;
   box-shadow: none !important;
 }
 
-.buscador-personalizado i {
+.buscador i {
   color: #5a32a3;
 }
 
@@ -159,7 +159,7 @@ nav.navbar:hover {
 }
 
 /* PARA TODOS LOS CARDS */
-.card-servicio {
+.cardDeInformacion {
   border: 2px solid #6f42c1;
   border-radius: 15px;
   background: white;
@@ -170,41 +170,50 @@ nav.navbar:hover {
   height: 100%;
 }
 
-.card-servicio:hover {
+.cardDeInformacion:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(111, 66, 193, 0.2);
 }
 
-.card-servicio-header {
+.headerDelCardDeInformacion {
   background: #6f42c1;
   color: white;
   padding: 15px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  text-align: center;
 }
 
-.card-servicio-body {
+.bodyDelCardDeInformacion {
   padding: 20px;
 }
 
-.card-servicio-body ul {
+.bodyDelCardDeInformacion ul {
   list-style: none;
   padding: 0;
 }
 
-.card-servicio-body ul li {
+.bodyDelCardDeInformacion ul li {
   padding-left: 20px;
   position: relative;
 }
 
-.card-servicio-body ul li::before {
+.bodyDelCardDeInformacion ul li::before {
   content: "•";
   color: #6f42c1;
   position: absolute;
   left: 0;
 }
 
-/* VIDEO DE GUIASYRECURSOS.TSX */
-.video-container {
+/* GUIAS Y RECURSOS.TSX */
+.botonChatGuiasYrecursos {
+  background: #25d366;
+}
+
+.videoDeGuiasYrecursos {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
@@ -212,14 +221,14 @@ nav.navbar:hover {
   border-radius: 8px;
 }
 
-.video-container iframe {
+.videoDeGuiasYrecursos iframe {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
 /* CHAT */
-.chat-float {
+.iconoDelChat {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -228,6 +237,7 @@ nav.navbar:hover {
   background: #5a32a3;
   color: white;
   border-radius: 50%;
+  border: 2px solid #490268 !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -236,16 +246,75 @@ nav.navbar:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* TESTIMONIOS.TSX */
-.texto-morado {
-  color: #6f42c1 !important;
+/* BOTON DEL CHAT.TSX Y DE TESTIMONIOS.TSX */
+.botonesMorados {
+  background: #6f42c1 !important;
+  border: 2px solid #490268 !important;
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
 }
 
-.borde-morado {
+.status-online {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 14px;
+  margin: 6px 0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.message.sent {
+  align-self: flex-end;
+  background-color: #6f42c1;
+  color: white;
+}
+
+.message.received {
+  align-self: flex-start;
+  background-color: #f1e8ff;
+  color: #3b1f70;
+}
+
+.border-morado {
+  border: 2px solid #6f42c1 !important;
+}
+
+.titulos {
+  text-align: center;
+  font-weight: 700;
+  color: #6f42c1;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-decoration: underline;
+}
+
+/* TESTIMONIOS.TSX */
+.textoSoloMorado {
+  color: #6f42c1 !important;
+  text-decoration: underline;
+}
+
+.bordeMoradoDeLosBotones {
   border-color: #6f42c1 !important;
 }
 
-.icono-perfil-circulo {
+.iconoDeLosPerfiles {
   background: #f3e5f5;
   color: #6f42c1;
   border: 2px solid #6f42c1;
@@ -257,29 +326,41 @@ nav.navbar:hover {
   background: white;
 }
 
-.flecha-personalizada {
+.flechaCarrouselInformacion {
   background: #6f42c1;
   border-radius: 50%;
   padding: 20px;
 }
 
+.tamanoTestimoniosInformacion {
+  min-height: 300px;
+}
+
 /* FOOTER */
-.custom-footer {
+.estilosDelFooter {
   background-color: #6f42c1;
   color: white;
   padding: 3rem 0 2rem;
   margin-top: auto;
 }
 
-.footer-link {
+.linksDelFooter {
   color: #b8a2dd;
   text-decoration: none;
   transition: 0.3s;
 }
 
-.footer-link:hover {
+.linksDelFooter:hover {
   color: white;
-  transform: translateX(5px);
+  transform: translateY(-5px);
+}
+
+.linksDelFooter i {
+  font-size: 1.3rem;
+}
+
+.titulosDelFooter {
+  color: #490268;
 }
 
 /* MODO DISCRETO */
@@ -292,29 +373,101 @@ body.modo-discreto {
   color: grey !important;
 }
 
-body.modo-discreto .navbar,
-body.modo-discreto .buscador-personalizado {
+body.modo-discreto .navbar {
   background: #333 !important;
 }
-
-body.modo-discreto .card-servicio {
-  background: #3a3a3a !important;
-  color: grey !important;
+body.modo-discreto .iconoDelChat {
+  background: grey !important;
+  border: 2px solid black !important;
 }
 
-body.modo-discreto .chat-float {
-  background: grey !important;
+body.modo-discreto .botonesMorados {
+  background: #1d171f !important;
+  border: 1px solid #444 !important;
+}
+
+body.modo-discreto p {
+  color: grey !important;
+  text-decoration: none !important;
+}
+
+body.modo-discreto .titulosDelFooter,
+body.modo-discreto h5 {
+  color: rgb(86, 64, 126) !important;
+}
+
+/* MODO DISCRETO EN LOS CARDS DE INFORMACION */
+body.modo-discreto .card,
+body.modo-discreto .cardDeInformacion {
+  background-color: #3a3a3a !important;
+  color: #d0d0d0 !important;
+  border: 1px solid #555 !important;
+  filter: blur(5px);
+  transition:
+    filter 0.3s ease,
+    background-color 0.3s ease;
+}
+
+body.modo-discreto .card:hover,
+body.modo-discreto .cardDeInformacion:hover {
+  filter: blur(0);
+}
+
+/* MODO DISCRETO EN EL CARROUSEL DE TESTIMONIOS */
+body.modo-discreto .carouselDeTestimonios {
+  background: rgba(58, 58, 58, 0.6) !important;
+  backdrop-filter: blur(5px);
+  border: 1px solid #555 !important;
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+body.modo-discreto .carouselDeTestimonios:hover {
+  filter: blur(0);
+}
+
+/* MODO DISCRETO PARA QUE NO CAMBIEN DE COLOR LOS DOS BOTONES DE ARRIBA */
+body.modo-discreto .btn-modo-discreto {
+  background: linear-gradient(90deg, #6f42c1, #9b59b6) !important;
+  border: 2px solid #490268 !important;
+  color: white !important;
+}
+
+body.modo-discreto .btn.btn-danger.btn-panico {
+  background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
+  border: 2px solid #940404 !important;
+  color: white !important;
+  opacity: 1 !important;
 }
 
 /* RESPONSIVE */
-@media (max-width: 576px) {
-  .buscador-personalizado {
-    height: 45px;
+@media (max-width: 992px) {
+  .headerDelCardDeInformacion {
+    min-height: 140px;
+    font-size: 1rem;
   }
+}
 
-  .btn-modo-discreto,
-  .btn-danger {
-    height: 45px;
-    font-size: 0.9rem;
+@media (max-width: 576px) {
+  .headerDelCardDeInformacion {
+    min-height: auto;
+    padding: 20px 15px;
   }
+}
+
+/* CERRAR SESION */
+.contenedorParaCerrarLaSesion {
+  min-height: 100vh;
+}
+
+.cardDeCerrarSesion {
+  max-width: 400px;
+  width: 90%;
+  background: linear-gradient(180deg, #dabef9, #e8aefd);
+}
+
+.botonCerrarSesion {
+  background-color: #6f42c1 !important;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
 }
