@@ -14,6 +14,7 @@ import CentrosAcogida from "./pages/CentrosAcogida";
 import Psicologia from "./pages/Psicologia";
 import AyudaLegal from "./pages/AyudaLegal";
 import Emergencia from "./pages/Emergencia";
+import Recuperacion from "./pages/Recuperacion";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/recuperacion" element={<Recuperacion />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/introduccion" element={<Introduccion />} />
         <Route path="/derechosLegislacion" element={<DerechosLegislacion />} />

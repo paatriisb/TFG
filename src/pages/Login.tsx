@@ -2,6 +2,7 @@ import "../assets/css/loginRegistro.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 function Login() {
   const navigate = useNavigate();
 

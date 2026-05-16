@@ -58,96 +58,102 @@ const Emergencia = () => {
     window.open("https://www.google.com", "_blank");
   };
 
-  // =========================
-  // GEOLOCALIZACIÓN
-  // =========================
-  const obtenerUbicacion = (): Promise<[number, number]> => {
-    return new Promise((resolve, reject) => {
+  // ================= BOTÓN PÁNICO =================
+  const activarPanico = () => {
+    Swal.fire({
+      title: "¿ESTÁS SEGURA?",
+      html: 'Se enviará una patrulla de inmediato.<div id="mapa-alert" style="height:200px;margin-top:15px;border-radius:12px;"></div>',
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff0000",
+      confirmButtonText: "SÍ, ENVIAR AYUDA",
+
+      willOpen: () => {
+        if (!navigator.geolocation) {
+          Swal.showValidationMessage("Tu navegador no permite geolocalización");
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const loc: [number, number] = [
+              pos.coords.latitude,
+              pos.coords.longitude,
+            ];
+
+            setWomanLocation(loc);
+
+            const map = L.map("mapa-alert").setView(loc, 16);
+
+            L.tileLayer(
+              "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            ).addTo(map);
+
+            L.marker(loc).addTo(map);
+          },
+
+          (err) => {
+            console.error(err);
+
+            Swal.showValidationMessage(
+              "No se pudo obtener tu ubicación real. Activa GPS y permisos.",
+            );
+          },
+
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
+          },
+        );
+      },
+    }).then((res) => {
+      if (!res.isConfirmed) return;
+
+      const cont = contenedorRef.current;
+      if (!cont) return;
+
+      cont.style.display = "block";
+      cont.innerHTML = "";
+
+      // 🔥 IMPORTANTE: usa GPS REAL si existe
       navigator.geolocation.getCurrentPosition(
         (pos) => {
-          resolve([pos.coords.latitude, pos.coords.longitude]);
+          const loc: [number, number] = [
+            pos.coords.latitude,
+            pos.coords.longitude,
+          ];
+
+          const map = L.map(cont).setView(loc, 16);
+
+          L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          ).addTo(map);
+
+          const icon = L.icon({
+            iconUrl:
+              "https://cdn-icons-png.flaticon.com/512/11107/11107554.png",
+            iconSize: [45, 45],
+            iconAnchor: [22, 45],
+          });
+
+          L.marker(loc, { icon }).addTo(map).bindPopup("<b>ESTÁS AQUÍ</b>");
         },
-        (err) => reject(err),
+
+        () => {
+          Swal.fire("Error", "No se pudo obtener tu ubicación real", "error");
+        },
+
         {
-          enableHighAccuracy: true, // Lo mantenemos pero con un timeout agresivo
-          timeout: 5000, // Si en 5 segundos no sale, corta
+          enableHighAccuracy: true,
+          timeout: 10000,
           maximumAge: 0,
         },
       );
     });
   };
-  // =========================
-  // BOTÓN PÁNICO
-  // =========================
-  const activarPanico = async () => {
-    const result = await Swal.fire({
-      title: "¿ESTÁS SEGURA?",
-      text: "Se enviará una patrulla de inmediato a tu ubicación actual.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ff0000",
-      confirmButtonText: "SÍ, ENVIAR AYUDA",
-      cancelButtonText: "CANCELAR",
-    });
 
-    if (!result.isConfirmed) return;
-
-    // Lanzamos la petición de ubicación
-    try {
-      const coords = await obtenerUbicacion();
-
-      // Seteamos el estado para que aparezca el div del mapa
-      setWomanLocation(coords);
-
-      // Usamos requestAnimationFrame en lugar de setTimeout.
-      // Es mucho más rápido porque espera al siguiente "dibujado" del navegador.
-      requestAnimationFrame(() => {
-        crearMapaMujer(coords);
-      });
-    } catch (error) {
-      console.error(error);
-      Swal.fire(
-        "Error",
-        "No se pudo obtener tu ubicación. Revisa los permisos del GPS.",
-        "error",
-      );
-    }
-  };
-
-  // =========================
-  // MAPA MUJER
-  // =========================
-  const crearMapaMujer = (coords: [number, number]) => {
-    if (!mapaMujerRef.current) return;
-
-    if (mapaMujerInstancia.current) {
-      mapaMujerInstancia.current.remove();
-    }
-
-    const map = L.map(mapaMujerRef.current).setView(coords, 16);
-
-    mapaMujerInstancia.current = map;
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
-      map,
-    );
-
-    const chicaIcon = L.icon({
-      iconUrl: "https://cdn-icons-png.flaticon.com/512/11107/11107554.png",
-      iconSize: [35, 35],
-      iconAnchor: [17, 35],
-    });
-
-    L.marker(coords, { icon: chicaIcon }).addTo(map);
-
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 300);
-  };
-
-  // =========================
-  // SIGUIENTE PREGUNTA
-  // =========================
+  // ================= CUESTIONARIO =================
   const siguientePregunta = () => {
     if (pasoActual < preguntas.length - 1) {
       setPasoActual((prev) => prev + 1);
@@ -160,103 +166,70 @@ const Emergencia = () => {
     }
   };
 
-  // =========================
-  // MAPA PATRULLA (CORREGIDO)
-  // =========================
-  const dibujarMapaPatrulla = async () => {
-    if (!mapaPatrullaRef.current) return;
+  // ================= MAPA PATRULLA =================
+  const dibujarMapaPatrulla = () => {
+    const div = mapaPatrullaRef.current;
+    if (!div) return;
 
-    const coords = womanLocation || [40.4167, -3.7037];
+    div.innerHTML = "";
 
-    if (mapaPatrullaInstancia.current) {
-      mapaPatrullaInstancia.current.remove();
-    }
+    if (!navigator.geolocation) return;
 
-    const map = L.map(mapaPatrullaRef.current).setView(coords, 15);
-    mapaPatrullaInstancia.current = map;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const centro: [number, number] = [
+          pos.coords.latitude,
+          pos.coords.longitude,
+        ];
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
-      map,
+        const map = L.map(div).setView(centro, 16);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+          map,
+        );
+
+        // 🚓 ICONO MÁS PEQUEÑO (COCHE PATRULLA)
+        const icono = L.icon({
+          iconUrl: "https://cdn-icons-png.flaticon.com/512/1048/1048310.png",
+          iconSize: [30, 30], // 👈 más pequeño
+          iconAnchor: [15, 15],
+        });
+
+        // posición inicial ligeramente alejada
+        let marker = L.marker([centro[0] - 0.002, centro[1] - 0.002], {
+          icon: icono,
+        }).addTo(map);
+
+        let frame = 0;
+
+        let anim = setInterval(() => {
+          frame++;
+
+          let current = marker.getLatLng();
+
+          // 🚨 movimiento suave (NO “vuela”)
+          let newLat = current.lat + (centro[0] - current.lat) * 0.08;
+          let newLng = current.lng + (centro[1] - current.lng) * 0.08;
+
+          marker.setLatLng([newLat, newLng]);
+
+          if (frame >= 60) {
+            clearInterval(anim);
+            marker.bindPopup("<b>LLEGANDO</b>").openPopup();
+          }
+        }, 300);
+      },
+
+      () => {
+        console.log("No se pudo obtener ubicación para patrulla");
+      },
+
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      },
     );
-
-    const chicaIcon = L.icon({
-      iconUrl: "https://cdn-icons-png.flaticon.com/512/11107/11107554.png",
-      iconSize: [30, 30],
-      iconAnchor: [17, 35],
-    });
-
-    L.marker(coords, { icon: chicaIcon }).addTo(map);
-
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 300);
-
-    let startLat = coords[0] - 0.005;
-    let startLng = coords[1] - 0.005;
-
-    const url = `https://router.project-osrm.org/route/v1/driving/${startLng},${startLat};${coords[1]},${coords[0]}?overview=full&geometries=geojson&steps=true`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-
-      const coordinates = data.routes[0].geometry.coordinates.map(
-        (c: number[]) => [c[1], c[0]],
-      );
-
-      const iconoPoli = L.divIcon({
-        className: "car-icon",
-        html: `<div class="car">🚓</div>`,
-        iconSize: [80, 80],
-      });
-
-      let marcador = L.marker(coordinates[0], { icon: iconoPoli }).addTo(map);
-
-      // CONFIGURACIÓN DEL TIEMPO (1 MINUTO EXACTO)
-      const TIEMPO_TOTAL_MS = 60000; // 60 segundos
-      const FPS = 30; // Cuadros por segundo para suavidad
-      const totalPasosGlobales = (TIEMPO_TOTAL_MS / 1000) * FPS;
-      const pasosPorTramo = totalPasosGlobales / (coordinates.length - 1);
-
-      let i = 0;
-      const animarCoche = () => {
-        if (i < coordinates.length - 1) {
-          const puntoInicio = coordinates[i];
-          const puntoDestino = coordinates[i + 1];
-          let pasoActualEnTramo = 0;
-
-          const intervaloSuave = setInterval(() => {
-            if (pasoActualEnTramo >= pasosPorTramo) {
-              clearInterval(intervaloSuave);
-              i++;
-              animarCoche();
-            } else {
-              const progreso = pasoActualEnTramo / pasosPorTramo;
-              const lat =
-                puntoInicio[0] + (puntoDestino[0] - puntoInicio[0]) * progreso;
-              const lng =
-                puntoInicio[1] + (puntoDestino[1] - puntoInicio[1]) * progreso;
-              marcador.setLatLng([lat, lng]);
-              pasoActualEnTramo++;
-            }
-          }, 1000 / FPS);
-        } else {
-          // LLEGADA AL DESTINO
-          marcador.bindPopup("<b>Patrulla en tu domicilio</b>").openPopup();
-          Swal.fire({
-            title: "¡AYUDA LLEGANDO!",
-            text: "La policía está en tu ubicación actual.",
-            icon: "info",
-            confirmButtonColor: "#6f42c1",
-            confirmButtonText: "ENTENDIDO",
-          });
-        }
-      };
-
-      animarCoche();
-    } catch (error) {
-      console.error("Error en la ruta:", error);
-    }
   };
 
   // CERRAR SESIÓN POR INACTIVIDAD DE 1 MINUTO
@@ -293,13 +266,12 @@ const Emergencia = () => {
 
   return (
     <>
-      {/* ================= NAVBAR COMPLETO ================= */}
+      {/* Navegador */}
       <nav
         className="navbar navbar-expand-sm navbar-dark"
         style={{ backgroundColor: "#6f42c1" }}
       >
         <div className="container-fluid d-flex p-0">
-          {/* LOGO */}
           <div className="nav-item text-center flex-fill">
             <div
               className="navbar-brand text-white"
@@ -316,7 +288,6 @@ const Emergencia = () => {
             </div>
           </div>
 
-          {/* BOTÓN HAMBURGUESA */}
           <button
             className="navbar-toggler"
             type="button"
@@ -326,10 +297,8 @@ const Emergencia = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* CONTENIDO NAVBAR */}
           <div className="collapse navbar-collapse" id="navbarContent">
             <div className="d-flex w-100">
-              {/* EMERGENCIA */}
               <div className="nav-item text-center flex-fill">
                 <span
                   className="nav-link text-white botonEmergencia"
@@ -339,8 +308,6 @@ const Emergencia = () => {
                   Emergencia
                 </span>
               </div>
-
-              {/* SERVICIOS */}
               <div className="nav-item dropdown text-center flex-fill">
                 <a
                   className="nav-link dropdown-toggle text-white"
@@ -350,7 +317,6 @@ const Emergencia = () => {
                 >
                   Servicios
                 </a>
-
                 <ul className="dropdown-menu">
                   <li>
                     <span
@@ -361,7 +327,6 @@ const Emergencia = () => {
                       Ayuda legal
                     </span>
                   </li>
-
                   <li>
                     <span
                       className="dropdown-item"
@@ -371,7 +336,6 @@ const Emergencia = () => {
                       Psicología
                     </span>
                   </li>
-
                   <li>
                     <span
                       className="dropdown-item"
@@ -384,7 +348,6 @@ const Emergencia = () => {
                 </ul>
               </div>
 
-              {/* INFORMACIÓN */}
               <div className="nav-item dropdown text-center flex-fill">
                 <a
                   className="nav-link dropdown-toggle text-white"
@@ -394,7 +357,6 @@ const Emergencia = () => {
                 >
                   Información
                 </a>
-
                 <ul className="dropdown-menu">
                   <li>
                     <span
@@ -405,7 +367,6 @@ const Emergencia = () => {
                       Prevención y seguridad
                     </span>
                   </li>
-
                   <li>
                     <span
                       className="dropdown-item"
@@ -415,7 +376,6 @@ const Emergencia = () => {
                       Derechos y legislación
                     </span>
                   </li>
-
                   <li>
                     <span
                       className="dropdown-item"
@@ -425,7 +385,6 @@ const Emergencia = () => {
                       Guías y recursos de apoyo
                     </span>
                   </li>
-
                   <li>
                     <span
                       className="dropdown-item"
@@ -438,7 +397,6 @@ const Emergencia = () => {
                 </ul>
               </div>
 
-              {/* PERFIL */}
               <div className="nav-item dropdown text-center flex-fill">
                 <a
                   className="nav-link dropdown-toggle text-white"
@@ -448,7 +406,6 @@ const Emergencia = () => {
                 >
                   <i className="bi bi-person"></i>
                 </a>
-
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span
@@ -459,7 +416,6 @@ const Emergencia = () => {
                       Editar perfil
                     </span>
                   </li>
-
                   <li>
                     <span
                       className="dropdown-item text-danger"
@@ -496,124 +452,106 @@ const Emergencia = () => {
       </div>
 
       {/* BOTÓN EMERGENCIA */}
-      <div className="container mt-4">
-        <div className="row justify-content-center">
-          <div className="col-12 text-center">
-            <button
-              id="BOTON-PANICO-REAL"
-              className="boton-panico w-50 py-3 fs-3 fw-bold"
-              onClick={activarPanico}
-            >
-              EMERGENCIA
-            </button>
+      <div className="text-center mb-4">
+        <button
+          id="BOTON-PANICO-REAL"
+          onClick={activarPanico}
+          style={{
+            padding: "30px 80px",
+            fontSize: "40px",
+            fontWeight: "900",
+            color: "white",
+            background: "#ff0000",
+            border: "6px solid white",
+            borderRadius: "15px",
+          }}
+        >
+          EMERGENCIA
+        </button>
+      </div>
 
-            {womanLocation && (
-              <div className="col-lg-5 mx-auto">
-                <div className="contenedor-mapa-mujer mt-4 shadow-sm">
-                  <div
-                    ref={mapaMujerRef}
-                    style={{
-                      height: "200px",
-                      minHeight: "200px", // Añade esto
-                      width: "100%", // Asegura el ancho
-                      borderRadius: "10px",
-                      backgroundColor: "#eee", // Color de fondo mientras carga el mapa
-                    }}
-                  />
-
-                  <div className="text-center mt-3">
-                    <strong style={{ color: "#6f42c1" }}>
-                      📍 Localización confirmada.
-                    </strong>
-
-                    <p className="small mb-0">
-                      La patrulla está en camino. Por favor, rellena el
-                      cuestionario.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
+      {/* MAPA */}
+      <div className="d-flex justify-content-center mb-5">
+        <div
+          className="card shadow"
+          style={{
+            width: "350px",
+            borderRadius: "20px",
+            border: "3px solid #6f42c1",
+          }}
+        >
+          <div className="card-body p-0">
+            <div
+              ref={contenedorRef}
+              style={{
+                display: "none",
+                width: "100%",
+                height: "320px",
+                borderRadius: "20px",
+                overflow: "hidden",
+              }}
+            />
           </div>
         </div>
       </div>
 
-      {/* CUESTIONARIO */}
-      <div className="container mt-5 pb-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-6 col-md-8">
-            {!mostrarAyuda ? (
-              <div className="card-servicio shadow card-emergencia-grande">
-                <div className="card-servicio-header">
-                  ENCUESTA DE SEGURIDAD
-                </div>
+      {/* ================= CUESTIONARIO CON CARD ================= */}
+      {!mostrarAyuda ? (
+        <div className="d-flex justify-content-center">
+          <div
+            className="card shadow"
+            style={{
+              width: "450px",
+              borderRadius: "25px",
+              border: "6px solid #6f42c1",
+              padding: "25px",
+              textAlign: "center",
+            }}
+          >
+            <h4 className="mb-4">{preguntas[pasoActual]}</h4>
 
-                <div className="card-servicio-body text-center">
-                  <h3 className="pregunta-emergencia">
-                    {preguntas[pasoActual]}
-                  </h3>
+            <div className="d-flex gap-3 justify-content-center">
+              <button
+                className="btn"
+                style={{
+                  backgroundColor: "#6f42c1",
+                  color: "white",
+                  fontWeight: "700",
+                  borderRadius: "12px",
+                  padding: "10px 30px",
+                }}
+                onClick={siguientePregunta}
+              >
+                SÍ
+              </button>
 
-                  <div className="d-flex gap-3">
-                    <button
-                      className="btn btn-lg flex-fill py-3 fs-4 fw-bold text-white btn-si-morado"
-                      onClick={siguientePregunta}
-                      disabled={!womanLocation}
-                    >
-                      SÍ
-                    </button>
-
-                    <button
-                      className="btn btn-outline-dark btn-lg flex-fill py-3 fs-4 fw-bold btn-no-gris"
-                      onClick={siguientePregunta}
-                      disabled={!womanLocation}
-                    >
-                      NO
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="card-servicio shadow card-emergencia-grande">
-                <div
-                  className="card-servicio-header"
-                  style={{
-                    background: "#dc3545",
-                  }}
-                >
-                  AYUDA EN CAMINO
-                </div>
+              <button
+                className="btn btn-outline-dark"
+                style={{
+                  borderRadius: "12px",
+                  padding: "10px 30px",
+                  fontWeight: "700",
+                }}
+                onClick={siguientePregunta}
+              >
+                NO
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="text-center">
+          <h3>AYUDA EN CAMINO</h3>
 
                 <div className="card-servicio-body">
                   <div className="alert alert-warning text-center fw-bold fs-4 mb-4">
                     Patrulla más cercana: 1 min
                   </div>
 
-                  <p className="fw-bold fs-5 mb-3">RECOMENDACIONES</p>
-
-                  <ul className="lista-emergencia">
-                    <li>
-                      <i className="bi bi-circle-fill punto-rojo"></i>
-                      Mantén la calma y respira profundamente.
-                    </li>
-
-                    <li>
-                      <i className="bi bi-circle-fill punto-rojo"></i>
-                      Cierra puertas o busca un refugio seguro.
-                    </li>
-
-                    <li>
-                      <i className="bi bi-circle-fill punto-rojo"></i>
-                      Deja la línea libre para contactar con la policía.
-                    </li>
-                  </ul>
-                  <div
-                    ref={mapaPatrullaRef}
-                    className="mapa-patrulla mt-4 shadow-sm"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+          <div
+            ref={mapaPatrullaRef}
+            style={{ height: "320px", marginTop: "20px" }}
+          />
         </div>
       </div>
 
@@ -635,6 +573,7 @@ const Emergencia = () => {
                 información y acompañamiento profesional en momentos críticos.
               </p>
             </div>
+
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
               <h5 className="text-uppercase mb-4 fw-bold text-info">
@@ -669,6 +608,7 @@ const Emergencia = () => {
               </p>
             </div>
 
+
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
               <h5 className="text-uppercase mb-4 fw-bold text-danger">
                 Emergencias 24/7
@@ -684,6 +624,7 @@ const Emergencia = () => {
                 consultas@igualdad.gob.es
               </p>
             </div>
+
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
               <h5 className="text-uppercase mb-4 fw-bold text-info">
@@ -703,7 +644,9 @@ const Emergencia = () => {
             </div>
           </div>
 
+
           <hr className="mb-4 mt-4" />
+
 
           <div className="row align-items-center">
             <div className="col-md-7 col-lg-8">
@@ -724,5 +667,6 @@ const Emergencia = () => {
     </>
   );
 };
+
 
 export default Emergencia;
