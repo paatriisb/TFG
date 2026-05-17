@@ -1,0 +1,148 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+/* COLOR DEL FONDO EN HOME.TSX */
+.fondo {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #e4cefd, #f9e9dd);
+}
+
+/* CARD DEL HOME.TSX */
+.cardPrincipal {
+  width: 100%;
+  max-width: 700px;
+  margin: 1rem auto;
+  border-radius: 16px;
+}
+
+.cardPrincipal:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.cardPrincipal .card-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.cardPrincipal .card-body {
+  background-color: #e8d7fb;
+}
+
+.colorHeaderCard {
+  background-color: #6f42c1 !important;
+  padding: 1rem !important;
+}
+
+/* MINICARDS */
+.itemDeLaCard {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.itemDeLaCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* TEXTO DE CADA MINICARD */
+.tituloDelItem {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.subtexto {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+/* TODOS LOS BOTONES */
+.botonParaEntrar {
+  background: linear-gradient(90deg, #6f42c1, #9b59b6);
+  font-weight: 600;
+  border: 2px solid #490268 !important;
+}
+
+.btn {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn-modo-discreto {
+  background: linear-gradient(90deg, #6f42c1, #9b59b6) !important;
+  color: white !important;
+  border: 2px solid #490268 !important;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+}
+
+.btn-danger {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
+  color: white !important;
+  border: 2px solid #940404 !important;
+}
+
+/*  MODO DISCRETO */
+body.modo-discreto .fondo {
+  background: #272525 !important;
+}
+
+body.modo-discreto .cardPrincipal {
+  background-color: #3a3a3a !important;
+  color: #d0d0d0 !important;
+  border: 1px solid #555 !important;
+  filter: blur(5px);
+  transition:
+    filter 0.3s ease,
+    background-color 0.3s ease;
+}
+
+body.modo-discreto .cardPrincipal:hover {
+  filter: blur(0);
+}
+
+body.modo-discreto .card-header {
+  background: #222 !important;
+}
+
+body.modo-discreto .cardPrincipal .card-body {
+  background-color: transparent !important;
+}
+
+body.modo-discreto .cardPrincipal .itemDeLaCard {
+  filter: none !important;
+  background: #4c4b4b !important;
+  color: grey !important;
+  border: 1px solid #5a5a5a !important;
+}
+
+body.modo-discreto .botonParaEntrar {
+  background: #1d171f !important;
+}
+
+body.modo-discreto .subtexto {
+  color: grey !important;
+}

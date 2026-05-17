@@ -1,0 +1,155 @@
+/* ESTILOS GENERALES */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, #e4cefd, #f9e9dd);
+  pointer-events: none;
+}
+
+/* BOTONES MODO DISCRETO / SALIDA RÁPIDA (X) */
+.btn-modo-discreto,
+.btn-danger {
+  height: 50px !important;
+  padding: 0 1.5rem !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+.btn-modo-discreto {
+  background: linear-gradient(90deg, #6f42c1, #9b59b6) !important;
+  color: white !important;
+  border: 2px solid #490268 !important;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+}
+
+.btn-danger {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
+  color: white !important;
+  border: 2px solid #940404 !important;
+}
+
+/* CARD DEL LOGIN Y ELEMENTOS DEL FORMULARIO */
+.card-login {
+  background-color: #e5dbff;
+  border: none;
+  border-radius: 15px;
+  max-width: 550px;
+  margin: 3rem auto;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-encabezado {
+  background: linear-gradient(90deg, #6f42c1, #8553e6);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.texto-destacado {
+  color: #6f42c1;
+  font-weight: bold;
+}
+
+/* BOTONES Y ENLACES DEL FORMULARIO */
+.btn-acceso-login {
+  background: linear-gradient(90deg, #6f42c1, #9b59b6);
+  border: none;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.form-check-input:checked {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+.form-check-label {
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* MODO DISCRETO */
+body.modo-discreto::before {
+  background: #272525 !important;
+  opacity: 1;
+}
+
+body.modo-discreto {
+  background: #4e4d4d !important;
+  color: #d0d0d0 !important;
+}
+
+body.modo-discreto .card-login {
+  background-color: #3a3a3a !important;
+  color: #d0d0d0 !important;
+  border: 1px solid #555 !important;
+  filter: blur(5px);
+  transition:
+    filter 0.3s ease,
+    background-color 0.3s ease;
+}
+
+body.modo-discreto .card-login:hover {
+  filter: blur(0);
+}
+
+body.modo-discreto .card-encabezado {
+  background: #222 !important;
+}
+
+body.modo-discreto .texto-destacado {
+  color: white !important;
+}
+
+body.modo-discreto .form-control {
+  background-color: #444 !important;
+  border-color: #666 !important;
+  color: white !important;
+}
+
+body.modo-discreto .btn-acceso-login {
+  background: #555 !important;
+  border: 1px solid #666 !important;
+}
+
+body.modo-discreto .form-check-label {
+  color: white !important;
+}
+
+body.modo-discreto input.form-control::placeholder {
+  color: grey !important;
+}
+
+body.modo-discreto #enlaceRegistro,
+body.modo-discreto #enlaceLogin {
+  color: grey !important;
+}
