@@ -448,7 +448,7 @@ body.modo-discreto .custom-footer {
 body.modo-discreto .custom-footer .titulosDelFooter,
 body.modo-discreto .custom-footer .linksDelFooter,
 body.modo-discreto .custom-footer strong.titulosDelFooter {
-  color: #777 !important;
+  color: #e9e5e5 !important;
   text-shadow: none;
 }
 
@@ -487,4 +487,13 @@ body.modo-discreto .custom-footer strong.titulosDelFooter {
   #navbarContent .nav-item:not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
+}
+body.modo-discreto .pregunta-emergencia {
+  color: #846ab1 !important;
+}
+body.modo-discreto .btn-danger {
+  background: linear-gradient(90deg, #ff4c4c, #ff0000) !important;
+  color: rgb(255, 255, 255) !important;
+  font-weight: 800 !important;
+  border: 2px solid #940404 !important;
 }

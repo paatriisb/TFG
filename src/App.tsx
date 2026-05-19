@@ -15,6 +15,7 @@ import Psicologia from "./pages/Psicologia";
 import AyudaLegal from "./pages/AyudaLegal";
 import Emergencia from "./pages/Emergencia";
 import Recuperacion from "./pages/Recuperacion";
+import ActualizarPassword from "./pages/ActualizarPassword";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/recuperacion" element={<Recuperacion />} />
+        <Route path="/actualizar-password" element={<ActualizarPassword />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/introduccion" element={<Introduccion />} />
         <Route path="/derechosLegislacion" element={<DerechosLegislacion />} />
