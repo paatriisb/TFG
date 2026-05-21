@@ -280,7 +280,7 @@ const Emergencia = () => {
         } else {
           marcador.bindPopup("<b>Patrulla en tu domicilio</b>").openPopup();
           Swal.fire({
-            title: "¡AYUDA LLEGANDO!",
+            title: "¡LA PATRULLA YA HA LLEGADO!",
             text: "La policía está en tu ubicación actual.",
             icon: "info",
             confirmButtonColor: "#6f42c1",
@@ -512,7 +512,7 @@ const Emergencia = () => {
                 />
                 <div className="text-center mt-3">
                   <strong style={{ color: "#6f42c1" }}>
-                    📍 Localización confirmed
+                    📍 Localización confirmada
                   </strong>
                   <p className="small mb-0">
                     La patrulla está en camino. Por favor, rellena el

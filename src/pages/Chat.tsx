@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "./supabaseClient";
 import "../assets/css/informacion.css";
 
 const ChatSeguro = () => {
@@ -125,12 +126,38 @@ const ChatSeguro = () => {
     window.open("https://www.google.com", "_newtab");
   };
 
-  const addMessage = (text: string, type: "sent" | "received") => {
-    setMessages((prev) => [
-      ...prev,
-      { text, type, id: Date.now() + Math.random() },
-    ]);
+ const addMessage = async (
+  text: string,
+  type: "sent" | "received"
+) => {
+
+  const nuevoMensaje = {
+    text,
+    type,
+    id: Date.now() + Math.random(),
   };
+
+  setMessages((prev) => [...prev, nuevoMensaje]);
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+console.log(user);
+  if (!user) return;
+
+ const { error } = await supabase
+  .from("chats")
+  .insert([
+    {
+      user_id: user.id,
+      message: text,
+    },
+  ]);
+
+if (error) {
+  console.error(error);
+}
+};
 
   const iniciarChat = (opcion: Especialidad) => {
     setEspecialidadActual(opcion);

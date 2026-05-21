@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { supabase } from "./supabaseClient";
 import "../assets/css/loginRegistro.css";
 
 function Registro() {
@@ -85,51 +86,56 @@ function Registro() {
   };
 
   // VALIDACIÓN Y ENVÍO DEL FORMULARIO DE REGISTRO
-  const validarFormulario = (e: React.FormEvent) => {
-    e.preventDefault();
+  const validarFormulario = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    if (localStorage.getItem("emailRegistrado") === email && email !== "") {
-      Swal.fire("Error", "Este correo ya existe", "error");
-      return;
-    }
+  // 1. comprobar campos
+  if (!email || !password || !confirmarContraseña) {
+    Swal.fire("Atención", "Completa todos los campos", "warning");
+    return;
+  }
 
-    if (!password || !confirmarContraseña) {
-      Swal.fire("Atención", "Completa todos los campos", "warning");
-      return;
-    }
+  // 2. validar contraseñas
+  if (password !== confirmarContraseña) {
+    Swal.fire("Error", "Las contraseñas no coinciden", "error");
+    return;
+  }
 
-    let error = "";
+  // 3. validar seguridad (TU PARTE BUENA)
+  let error = "";
 
-    if (password.length < 8) {
-      error = "Mínimo 8 caracteres";
-    } else if (!/[A-Z]/.test(password)) {
-      error = "Debe tener una mayúscula";
-    } else if (!/[a-z]/.test(password)) {
-      error = "Debe tener una minúscula";
-    } else if (!/[0-9]/.test(password)) {
-      error = "Debe tener un número";
-    } else if (!/[!@#$%^&*()_+\-=[\]{};':\"\\|,.<>/?·]/.test(password)) {
-      error = "Debe tener un símbolo";
-    }
+  if (password.length < 8) {
+    error = "Mínimo 8 caracteres";
+  } else if (!/[A-Z]/.test(password)) {
+    error = "Debe tener una mayúscula";
+  } else if (!/[a-z]/.test(password)) {
+    error = "Debe tener una minúscula";
+  } else if (!/[0-9]/.test(password)) {
+    error = "Debe tener un número";
+  } else if (!/[!@#$%^&*()_+\-=[\]{};':\"\\|,.<>/?·]/.test(password)) {
+    error = "Debe tener un símbolo";
+  }
 
-    if (error) {
-      Swal.fire("Seguridad insuficiente", error, "warning");
-      return;
-    }
+  if (error) {
+    Swal.fire("Seguridad insuficiente", error, "warning");
+    return;
+  }
 
-    if (password !== confirmarContraseña) {
-      Swal.fire("Error", "Las contraseñas no coinciden", "error");
-      return;
-    }
+  // 4. CREAR USUARIO REAL (esto reemplaza localStorage)
+  const { error: supabaseError } = await supabase.auth.signUp({
+    email,
+    password,
+  });
 
-    localStorage.setItem("emailRegistrado", email);
-    localStorage.setItem("passRegistrada", password);
-    localStorage.setItem("usuario", "Patrii");
+  if (supabaseError) {
+    Swal.fire("Error", supabaseError.message, "error");
+    return;
+  }
 
-    Swal.fire("¡Éxito!", "Cuenta creada correctamente", "success").then(() => {
-      navigate("/login");
-    });
-  };
+  Swal.fire("¡Éxito!", "Cuenta creada correctamente", "success").then(() => {
+    navigate("/login");
+  });
+};
 
   return (
     <>
