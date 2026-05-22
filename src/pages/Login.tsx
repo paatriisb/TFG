@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "./supabaseClient";
 import "../assets/css/loginRegistro.css";
 
 function Login() {
@@ -80,22 +81,42 @@ function Login() {
   }, []);
 
   // VALIDACIÓN Y ENVÍO DEL FORMULARIO
-  const validarFormulario = (e: React.FormEvent) => {
+  const validarFormulario = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // comprobar campos vacíos
     if (!email || !password) {
       alert("Rellena todos los campos");
       return;
     }
 
-    const usuario = {
-      nombre: email.split("@")[0],
-      email: email,
-      password: password,
-    };
+    // comprobar formato email
+    if (!email.includes("@")) {
+      alert("Introduce un correo válido");
+      return;
+    }
 
-    localStorage.setItem("usuario", JSON.stringify(usuario));
-    console.log("Usuario guardado:", usuario);
+    // comprobar contraseña mínima
+    if (password.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres");
+      return;
+    }
+
+    // LOGIN REAL CON SUPABASE
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    // si hay error
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    // usuario correcto
+    console.log("Usuario logueado:", data.user);
+
     navigate("/emergencia");
   };
 

@@ -25,6 +25,49 @@ const ChatSeguro = () => {
     localStorage.getItem("modoDiscreto") === "true",
   );
 
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      },
+    );
+
+    const initUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    };
+
+    initUser();
+
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const loadMessages = async () => {
+      const { data, error } = await supabase
+        .from("chats")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: true });
+
+      if (!error && data) {
+        setMessages(
+          data.map((m) => ({
+            id: m.id,
+            text: m.message,
+            type: "received",
+          })),
+        );
+      }
+    };
+
+    loadMessages();
+  }, [user?.id]);
+
   const menus: Record<Especialidad, string> = {
     psicologa:
       "Elige una opción escribiendo el número:\n1. Técnicas de calma\n2. ¿Cómo gestionar el miedo?\n3. Redes de apoyo",
@@ -126,38 +169,41 @@ const ChatSeguro = () => {
     window.open("https://www.google.com", "_newtab");
   };
 
- const addMessage = async (
-  text: string,
-  type: "sent" | "received"
-) => {
+  const addMessage = async (text: string, type: "sent" | "received") => {
+    const nuevoMensaje = {
+      text,
+      type,
+      id: Date.now() + Math.random(),
+    };
 
-  const nuevoMensaje = {
-    text,
-    type,
-    id: Date.now() + Math.random(),
+    setMessages((prev) => [...prev, nuevoMensaje]);
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      console.log("No hay usuario");
+      return;
+    }
+
+    console.log("ENTRANDO EN ADDMESSAGE");
+    console.log(user);
+
+    const { data, error } = await supabase.from("chats").insert([
+      {
+        user_id: user.id,
+        message: text,
+      },
+    ]);
+
+    if (error) {
+      console.error("❌ ERROR INSERT CHAT:", error);
+      console.error("DETAIL:", error.details);
+      console.error("MESSAGE:", error.message);
+    }
+    console.log("USER ACTUAL:", user);
   };
-
-  setMessages((prev) => [...prev, nuevoMensaje]);
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-console.log(user);
-  if (!user) return;
-
- const { error } = await supabase
-  .from("chats")
-  .insert([
-    {
-      user_id: user.id,
-      message: text,
-    },
-  ]);
-
-if (error) {
-  console.error(error);
-}
-};
 
   const iniciarChat = (opcion: Especialidad) => {
     setEspecialidadActual(opcion);
